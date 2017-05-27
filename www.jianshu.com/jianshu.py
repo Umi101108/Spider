@@ -1,22 +1,70 @@
 # -*- coding: utf-8 -*-
 
 import requests
-
-url = 'http://www.jianshu.com'
-url = 'http://www.jianshu.com/?seen_snote_ids%5B%5D=12783954&seen_snote_ids%5B%5D=12187879&seen_snote_ids%5B%5D=12799791&seen_snote_ids%5B%5D=12803717&seen_snote_ids%5B%5D=12748207&seen_snote_ids%5B%5D=12712438&seen_snote_ids%5B%5D=12710784&seen_snote_ids%5B%5D=12735077&seen_snote_ids%5B%5D=12698066&seen_snote_ids%5B%5D=12736519&seen_snote_ids%5B%5D=12755873&seen_snote_ids%5B%5D=12745555&seen_snote_ids%5B%5D=12707395&seen_snote_ids%5B%5D=12740881&seen_snote_ids%5B%5D=12684922&seen_snote_ids%5B%5D=12169263&seen_snote_ids%5B%5D=12589375&seen_snote_ids%5B%5D=12743259&seen_snote_ids%5B%5D=12742335&seen_snote_ids%5B%5D=12710083&seen_snote_ids%5B%5D=12817325&seen_snote_ids%5B%5D=8852442&seen_snote_ids%5B%5D=12809319&seen_snote_ids%5B%5D=12812380&seen_snote_ids%5B%5D=12806950&seen_snote_ids%5B%5D=12815754&seen_snote_ids%5B%5D=12573038&seen_snote_ids%5B%5D=12713215&seen_snote_ids%5B%5D=12817633&seen_snote_ids%5B%5D=12800311&seen_snote_ids%5B%5D=12618840&seen_snote_ids%5B%5D=12799994&seen_snote_ids%5B%5D=12796766&seen_snote_ids%5B%5D=12760010&seen_snote_ids%5B%5D=12750498&seen_snote_ids%5B%5D=12753970&seen_snote_ids%5B%5D=12812596&seen_snote_ids%5B%5D=12806553&seen_snote_ids%5B%5D=12658283&seen_snote_ids%5B%5D=12761472&page=3'
+from bs4 import BeautifulSoup
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 class JianShu(object):
 
 	def __init__(self):
-		self.url = 'http://www.jianshu.com'
+		self.url = 'http://www.jianshu.com/trending/weekly?page={}'
+		self.user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+		self.headers = {'User-Agent': self.user_agent}
+		self.result = []
 
-	def getInfo(self):
-		html = requests.get(self.url).content
-		print html
+	def getInfo(self, url):
+		html = requests.get(url, headers=self.headers).text
+		# print html
+		soup = BeautifulSoup(html, 'lxml')
+		notes = soup.find('ul', class_='note-list').find_all('li')
+		for note in notes:
+			name = note.find('a', class_='blue-link').text
+			title = note.find('a', class_='title').text
+			url = 'http://www.jianshu.com' + note.find('a', class_='title')['href']
+			abstract = note.find('p', class_='abstract').text.strip()
+			try:
+				tag = note.find('a', class_='collection-tag').text.strip()
+			except:
+				tag = None
+			reads = note.find('i', class_='iconfont ic-list-read').parent.text.strip()
+			comments = note.find('i', class_='iconfont ic-list-comments').parent.text.strip()
+			likes = note.find('i', class_='iconfont ic-list-like').parent.text.strip()
+			try:
+				moneys = note.find('i', class_='iconfont ic-list-money').parent.text.strip()
+			except:
+				moneys = None
+			# print name, '【' + title + '】', reads, comments, likes
+			# print abstract
 
+			data = {
+				"name": name,
+				"title": title,
+				"url": url,
+				"tag": tag,
+				"abstract": abstract,
+				"reads": reads,
+				"comments": comments,
+				"likes": likes,
+				"moneys": moneys,
+			}
+			self.result.append(data)
+			
+
+
+	def getTotal(self):
+		for i in range(1, 10):
+			url = self.url.format(str(i))
+			self.getInfo(url)
+
+		for i in self.result:
+			print "#"*66 + str(self.result.index(i)+1)
+			for k, v in i.iteritems():
+				print k, v
 
 
 if __name__ == '__main__':
 	jianshu = JianShu()
-	jianshu.getInfo()
+	jianshu.getTotal()
