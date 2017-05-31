@@ -27,7 +27,8 @@ class Weather(object):
 
 	def getUrl(self, year, month):
 		y = str(year)
-		m = str(month) if month>9 else "0"+str(month)
+		# m = str(month) if month>9 else "0"+str(month)
+		m = str(month).zfill(2)
 		url = self.base_url.format(y, y+m)
 		return url
 
