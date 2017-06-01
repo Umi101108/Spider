@@ -21,9 +21,19 @@ class Douban(object):
 			title = t.a['title'].strip()
 			url = t.a['href'].strip()
 			print title, url
+			self.getDetail(url)
+
+	def getDetail(self, url):
+		html = requests.get(url, headers=self.headers).content
+		soup = BeautifulSoup(html, 'lxml')
+		content = soup.find('div', class_="topic-doc")
+		try:
+			print content.text.strip()
+		except:
+			pass
 
 	def getTotal(self, group):
-		for i in range(1, 100, 25):
+		for i in range(1, 10, 25):
 			self.getInfo(self.base_url.format(group, i))
 
 if __name__ == "__main__":
