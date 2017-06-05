@@ -14,7 +14,7 @@ class DouBan(object):
 		self.result = []
 
 	def getInfo(self, url):
-		html = requests.get(url).content
+		html = requests.get(url).text
 		soup = BeautifulSoup(html, 'lxml')
 		movies = soup.find('ol', class_="grid_view").find_all('li')
 		for movie in movies:
