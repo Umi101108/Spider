@@ -1,7 +1,7 @@
 # coding: utf-8
 import os
 
-pwd = 'D:\\pictures\\' or '/User/umi/pictures'
+pwd = 'D:\\pictures\\' or '/User/umi/pictures/'
 
 def mkdir(self, path):
 	path = path.strip()
