@@ -2,7 +2,7 @@
 
 import requests
 from bs4 import BeautifulSoup
-
+import csv
 import sys
 sys.setdefaultencoding = 'utf8'
 
@@ -35,6 +35,11 @@ class Douban(object):
 	def getTotal(self, group):
 		for i in range(1, 10, 25):
 			self.getInfo(self.base_url.format(group, i))
+
+	def getToCSV(self, title, url, filename='download.csv'):
+		with open(filename, 'ab') as csvfile:
+			writer = csv.writer(csvfile, dialect = 'excel')
+			writer.writerow([title.encode('utf8'), url.encode('utf8')])
 
 if __name__ == "__main__":
 	douban = Douban()
