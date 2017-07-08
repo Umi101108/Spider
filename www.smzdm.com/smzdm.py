@@ -22,12 +22,15 @@ class Smzdm(object):
 		article_title = soup.select('.article_title > em[itemprop="name"]')[0].get_text().lstrip()
 		price = soup.select('.article_title > em > span')[0].get_text().strip()
 
+		fav_num = soup.select('div.leftLayer > a.fav')[0].get_text()
+		comment_num = soup.select('div.leftLayer > a.comment')[0].get_text()
+
 		self.getTag(soup)
 		self.getRating(soup)
 
 		if soup.select('.comment_wrap'):
 			try:
-				pageno = soup.select('.comment_wrap > div.tab_info > ul.pagination > li')[-4].get_text()	
+				pageno = soup.select('.comment_wrap > div.tab_info > ul.pagination > li')[-4].get_text()
 			except:
 				pageno = 1
 
