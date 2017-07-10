@@ -11,7 +11,7 @@ class Smzdm(object):
 	def __init__(self):
 		# self.base_url = "http://www.smzdm.com/p/1000211/"
 		# self.base_url = "http://www.smzdm.com/p/7502199/"
-		self.base_url = "http://www.smzdm.com/p/7499828/"
+		self.base_url = "http://www.smzdm.com/p/7499821/"
 		self.user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
 		self.headers = {'User-Agent': self.user_agent}
 
