@@ -11,14 +11,14 @@ class Xicidaili(object):
 
     def __init__(self):
         self.base_url = "http://www.xicidaili.com/nn/"
-        self.test_url = "http://www.maishoudang.com/deals/ya-ma-xun-primeday-jia-dian-zhuan-chang-hao-jia-he-ji-98598"
+        self.test_url = "http://www.cnblogs.com/juandx/p/5620126.html"
         self.set_timeout = 2
         self.IP_list = {}
-        self.user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+        self.user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"
         self.headers = {'User-Agent': self.user_agent}
 
-    def getSoup(self, url):
-        response = requests.get(url, headers=self.headers)
+    def getSoup(self, url, proxies=None, timeout=3):
+        response = requests.get(url, headers=self.headers, proxies=proxies)
         if response.status_code == 200:
             html = response.content
             soup = BeautifulSoup(html, 'lxml')
@@ -27,15 +27,19 @@ class Xicidaili(object):
             print "该网页不存在"
             return
 
-    def isAlive(self, ip_type, ip, port, set_timeout=3):
+    def isAlive(self, ip_type, ip, port):
         # ip = '11111.11111.111.111'
-        proxy = {ip_type:ip+':'+port}
-        response = requests.get(self.test_url, headers=self.headers, proxies=proxy, timeout=self.set_timeout)
-        if response.status_code == 200:
-            # print proxy, "可用"
-            self.IP_list[ip+':'+port] = ip_type
-        else:
-            print "不可用"
+        proxy = {ip_type.lower():ip+':'+port}
+        try:
+            response = requests.get(self.test_url, headers=self.headers, proxies=proxy, timeout=3)
+            if response.status_code == 200:
+                print proxy, "可用"
+                self.IP_list[ip+':'+port] = ip_type.lower()
+            else:
+                print "不可用"
+        except:
+            print proxy, "不可用"
+            pass
 
     def getRandomProxy(self):
         ip = random.choice(self.IP_list.keys())
@@ -50,9 +54,36 @@ class Xicidaili(object):
             port = ip_info.select('td')[2].get_text()
             ip_type = ip_info.select('td')[5].get_text()
             self.isAlive(ip_type, ip, port)
-        # for k, v in self.IP_list.iteritems():
-        #     print k, v
-        print self.getRandomProxy()
+        for k, v in self.IP_list.iteritems():
+            print k, v
+        
+        for i in xrange(10000):
+            proxies = self.getRandomProxy()
+        #     # proxies = {
+        #     # # "http": "123.130.14.149:8118",
+        #     # "http": "111.155.116.249:8123",
+        #     # }
+        #     # proxies = {
+        #     #     u'http': u'183.153.28.232:808'
+        #     # }
+#         {u'https': u'182.89.255.253:8123'}
+# {u'https': u'123.169.85.206:808'}
+# {u'https': u'122.241.74.193:808'}
+            # proxies = {u'https': u'119.23.129.24:3128'}
+            # print proxies
+        #     # response = requests.get('https://www.douban.com/group/shanghaizufang/', headers=self.headers, proxies=proxies, timeout=3)
+            try:
+                response = requests.get('https://www.douban.com/group/shanghaizufang/', headers=self.headers, proxies=proxies, timeout=0.5)
+        #     response = requests.get('http://www.whatismyip.com.tw/', headers=self.headers, proxies=proxies)
+
+                print response
+            except:
+                pass
+        # for i in xrange(10):
+        #     proxies = {'http': '119.23.129.24:3128'}
+        #     print proxies
+        #     response = requests.get('http://www.whatismyip.com.tw/', headers=self.headers, proxies=proxies)
+        #     print response
 
 
 
