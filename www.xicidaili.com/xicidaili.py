@@ -28,7 +28,6 @@ class Xicidaili(object):
             return
 
     def isAlive(self, ip_type, ip, port):
-        # ip = '11111.11111.111.111'
         proxy = {ip_type.lower():ip+':'+port}
         try:
             response = requests.get(self.test_url, headers=self.headers, proxies=proxy, timeout=3)
@@ -59,35 +58,11 @@ class Xicidaili(object):
         
         for i in xrange(10000):
             proxies = self.getRandomProxy()
-        #     # proxies = {
-        #     # # "http": "123.130.14.149:8118",
-        #     # "http": "111.155.116.249:8123",
-        #     # }
-        #     # proxies = {
-        #     #     u'http': u'183.153.28.232:808'
-        #     # }
-#         {u'https': u'182.89.255.253:8123'}
-# {u'https': u'123.169.85.206:808'}
-# {u'https': u'122.241.74.193:808'}
-            # proxies = {u'https': u'119.23.129.24:3128'}
-            # print proxies
-        #     # response = requests.get('https://www.douban.com/group/shanghaizufang/', headers=self.headers, proxies=proxies, timeout=3)
             try:
                 response = requests.get('https://www.douban.com/group/shanghaizufang/', headers=self.headers, proxies=proxies, timeout=0.5)
-        #     response = requests.get('http://www.whatismyip.com.tw/', headers=self.headers, proxies=proxies)
-
                 print response
             except:
                 pass
-        # for i in xrange(10):
-        #     proxies = {'http': '119.23.129.24:3128'}
-        #     print proxies
-        #     response = requests.get('http://www.whatismyip.com.tw/', headers=self.headers, proxies=proxies)
-        #     print response
-
-
-
-
 
 
 if __name__ == '__main__':
