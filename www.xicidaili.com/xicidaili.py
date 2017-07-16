@@ -56,7 +56,7 @@ class Xicidaili(object):
         for k, v in self.IP_list.iteritems():
             print k, v
         
-        for i in xrange(10000):
+        for i in xrange(1000):
             proxies = self.getRandomProxy()
             try:
                 response = requests.get('https://www.douban.com/group/shanghaizufang/', headers=self.headers, proxies=proxies, timeout=0.5)
