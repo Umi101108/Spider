@@ -2,7 +2,8 @@
 
 import requests
 from bs4 import BeautifulSoup
-
+from selenium import webdriver
+import time
 
 class Music(object):
 
@@ -52,8 +53,15 @@ class Music(object):
 
 		# data=r.text#data得到的就是json
 		# print data
-		self.getInfo()
-
+		# self.getInfo()
+		driver = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe')
+		driver.get(self.base_url)
+		time.sleep(5)
+		elem_songsall = driver.find_element_by_xpath('//*[@id="songsall"]')
+		elem_songsall.click()
+		time.sleep(5)
+		elem_songsmore = driver.find_element_by_xpath('//div[@class="more"]/a')
+		elem_songsmore.click()
 
 if __name__ == "__main__":
 	music = Music()
