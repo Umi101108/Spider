@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f964a53-b35f-44c0-8852-319d8481e35d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Basis/selenium_.py" afterPath="$PROJECT_DIR$/Basis/selenium_.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/music.163.com/music163.py" afterPath="$PROJECT_DIR$/music.163.com/music163.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,13 +13,13 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Spider$jianshu.coverage" NAME="jianshu Coverage Results" MODIFIED="1495983313647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/www.jianshu.com" />
-    <SUITE FILE_PATH="coverage/Spider$sele.coverage" NAME="sele Coverage Results" MODIFIED="1500387740962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/music.163.com" />
-    <SUITE FILE_PATH="coverage/Spider$selenium_.coverage" NAME="selenium_ Coverage Results" MODIFIED="1500388831928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Basis" />
+    <SUITE FILE_PATH="coverage/Spider$selenium_.coverage" NAME="selenium_ Coverage Results" MODIFIED="1500395017617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Basis" />
+    <SUITE FILE_PATH="coverage/Spider$sele.coverage" NAME="sele Coverage Results" MODIFIED="1500395030705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/music.163.com" />
     <SUITE FILE_PATH="coverage/Spider$smzdm.coverage" NAME="smzdm Coverage Results" MODIFIED="1499781405516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/www.smzdm.com" />
     <SUITE FILE_PATH="coverage/Spider$xicidaili.coverage" NAME="xicidaili Coverage Results" MODIFIED="1500039800420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/www.xicidaili.com" />
     <SUITE FILE_PATH="coverage/Spider$ip__1_.coverage" NAME="ip (1) Coverage Results" MODIFIED="1499780923552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/www.smzdm.com" />
     <SUITE FILE_PATH="coverage/Spider$ip.coverage" NAME="ip Coverage Results" MODIFIED="1499781209804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Basis" />
-    <SUITE FILE_PATH="coverage/Spider$music163.coverage" NAME="music163 Coverage Results" MODIFIED="1500385368392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/music.163.com" />
+    <SUITE FILE_PATH="coverage/Spider$music163.coverage" NAME="music163 Coverage Results" MODIFIED="1500395041896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/music.163.com" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -48,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="music163.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="music163.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/music.163.com/music163.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="68" column="16" lean-forward="true" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
+            <state relative-caret-position="462">
+              <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -60,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sele.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sele.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/music.163.com/sele.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            <state relative-caret-position="110">
+              <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -107,8 +105,8 @@
         <option value="$PROJECT_DIR$/Basis/ip.py" />
         <option value="$PROJECT_DIR$/www.xicidaili.com/xicidaili.py" />
         <option value="$PROJECT_DIR$/music.163.com/music163.py" />
-        <option value="$PROJECT_DIR$/music.163.com/sele.py" />
         <option value="$PROJECT_DIR$/Basis/selenium_.py" />
+        <option value="$PROJECT_DIR$/music.163.com/sele.py" />
       </list>
     </option>
   </component>
@@ -219,7 +217,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.selenium_">
+  <component name="RunManager" selected="Python.music163">
     <configuration default="false" name="smzdm" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -473,9 +471,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.selenium_" />
+        <item index="0" class="java.lang.String" itemvalue="Python.music163" />
         <item index="1" class="java.lang.String" itemvalue="Python.sele" />
-        <item index="2" class="java.lang.String" itemvalue="Python.music163" />
+        <item index="2" class="java.lang.String" itemvalue="Python.selenium_" />
         <item index="3" class="java.lang.String" itemvalue="Python.xicidaili" />
         <item index="4" class="java.lang.String" itemvalue="Python.smzdm" />
       </list>
@@ -617,16 +615,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/music.163.com/music163.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="68" column="16" lean-forward="true" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
-          <folding>
-            <element signature="e#24#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Python/2.7/site-packages/selenium/webdriver/common/service.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
@@ -647,9 +635,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/music.163.com/sele.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        <state relative-caret-position="110">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music.163.com/music163.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding>
+            <element signature="e#24#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
