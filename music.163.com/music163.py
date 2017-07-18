@@ -54,7 +54,8 @@ class Music(object):
 		# data=r.text#data得到的就是json
 		# print data
 		# self.getInfo()
-		driver = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe')
+		# driver = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe')
+		driver = webdriver.Chrome()
 		driver.get(self.base_url)
 		time.sleep(5)
 		elem_songsall = driver.find_element_by_xpath('//*[@id="songsall"]')
