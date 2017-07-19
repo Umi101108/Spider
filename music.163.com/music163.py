@@ -9,7 +9,7 @@ class Music(object):
 
 	def __init__(self):
 		self.base_url = "http://music.163.com/m/user/home?id=371821058"
-		self.songs_url = "http://music.163.com/m/user/songs/rank?id=371821058"
+		self.songs_url = "http://music.163.com/#/user/songs/rank?id=371821058"
 		self.user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
 		self.headers = {'User-Agent': self.user_agent}
 
@@ -42,7 +42,11 @@ class Music(object):
 
 	def getSongs(self):
 		soup = self.getSoup(self.songs_url)
-		print soup.select('div.g-bd')[0].get_text()
+		# print soup.select('div.g-bd')[0].get_text()
+		driver = webdriver.Chrome("/Users/umi/Downloads/chromedriver")
+		driver.get(self.songs_url)
+		print driver.page_source
+
 
 	def main(self):
 		# url='http://music.163.com/weapi/v1/resource/comments/R_SO_4_465920636?csrf_token=c0f6bfdcd0526ec0ba6c207051a08960'
@@ -55,14 +59,16 @@ class Music(object):
 		# print data
 		# self.getInfo()
 		# driver = webdriver.Chrome('C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe')
-		driver = webdriver.Chrome("/Users/umi/Downloads/chromedriver")
-		driver.get(self.base_url)
-		time.sleep(5)
-		elem_songsall = driver.find_element_by_xpath('//*[@id="songsall"]')
-		elem_songsall.click()
-		time.sleep(5)
-		elem_songsmore = driver.find_element_by_xpath('//div[@class="more"]/a')
-		elem_songsmore.click()
+		# driver = webdriver.Chrome("/Users/umi/Downloads/chromedriver")
+		# driver.get(self.base_url)
+		# time.sleep(5)
+		# elem_songsall = driver.find_element_by_xpath('//*[@id="songsall"]')
+		# elem_songsall.click()
+		# time.sleep(5)
+		# elem_songsmore = driver.find_element_by_xpath('//div[@class="more"]/a')
+		# elem_songsmore.click()
+		self.getSongs()
+
 
 if __name__ == "__main__":
 	music = Music()
