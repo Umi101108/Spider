@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f964a53-b35f-44c0-8852-319d8481e35d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/music.163.com/music163.py" afterPath="$PROJECT_DIR$/music.163.com/music163.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/music.163.com/sele.py" afterPath="$PROJECT_DIR$/music.163.com/sele.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,8 +27,8 @@
       <file leaf-file-name="music163.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/music.163.com/music163.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-549">
-              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="221">
+              <caret line="113" column="22" lean-forward="false" selection-start-line="113" selection-start-column="22" selection-end-line="113" selection-end-column="22" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
                 <element signature="e#618#818#0" expanded="false" />
@@ -629,8 +627,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/music.163.com/music163.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-549">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="221">
+          <caret line="113" column="22" lean-forward="false" selection-start-line="113" selection-start-column="22" selection-end-line="113" selection-end-column="22" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
             <element signature="e#618#818#0" expanded="false" />

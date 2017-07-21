@@ -111,8 +111,7 @@ class Music(object):
 	def main(self):
 		# self.getFavPlaylist()
 		self.getFavSongs()
-		# self.getRank()
-
+		self.getRank()
 
 if __name__ == "__main__":
 	music = Music()
