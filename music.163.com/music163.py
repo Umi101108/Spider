@@ -76,7 +76,8 @@ class Music(object):
 			song_title = m.find_element_by_xpath('.//div[@class="f-cb"]//b').text
 			artist = m.find_element_by_xpath('.//div[@class="text"]/span').text
 			album_name = m.find_element_by_xpath('.//div[@class="text"]/a[last()]').text
-			print song_id, no, song_title, artist, album_name
+			print song_id
+			print no, song_title, artist, album_name
 
 	def getRank2(self):
 		# driver = webdriver.Chrome("/Users/umi/Downloads/chromedriver")
@@ -111,7 +112,7 @@ class Music(object):
 	def main(self):
 		# self.getFavPlaylist()
 		self.getFavSongs()
-		self.getRank()
+		# self.getRank()
 
 if __name__ == "__main__":
 	music = Music()
