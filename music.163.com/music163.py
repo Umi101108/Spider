@@ -72,7 +72,7 @@ class Music(object):
 		for m in m_table:
 			# print '|'.join(m.text.split('\n'))
 			no = m.find_element_by_xpath('./td[@class="left"]').text
-			song_id = m.find_element_by_xpath('.//div[@class="f-cb"]//a::href')
+			song_id = m.find_element_by_xpath('.//div[@class="f-cb"]//a').get_attribute("href")
 			song_title = m.find_element_by_xpath('.//div[@class="f-cb"]//b').text
 			artist = m.find_element_by_xpath('.//div[@class="text"]/span').text
 			album_name = m.find_element_by_xpath('.//div[@class="text"]/a[last()]').text
