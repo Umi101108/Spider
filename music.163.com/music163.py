@@ -82,8 +82,18 @@ class Music(object):
 	def getRank2(self):
 		# driver = webdriver.Chrome("/Users/umi/Downloads/chromedriver")
 		driver = webdriver.PhantomJS("/Users/umi/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs")
-		driver.get(self.songs_url)
-		print driver.page_source
+		driver.get(self.rank_url)
+		driver.switch_to_frame('g_iframe')
+		wait = ui.WebDriverWait(driver, 15)
+		wait.until(lambda driver: driver.find_element_by_xpath('//div[@id="m-record"]/div/div/ul'))
+		span_songsall = driver.find_element_by_id('songsall')
+		span_songsall.click()
+		time.sleep(5)
+		songsall = driver.find_elements_by_xpath('//div[@id="m-record"]/div/div/ul/li')
+		for song in songsall:
+			print song.text
+			print song.get_attribute('id')
+		# print driver.page_source
 
 	def getRank(self):
 		url = 'http://music.163.com/weapi/v1/play/record?csrf_token='
@@ -111,8 +121,8 @@ class Music(object):
 
 	def main(self):
 		# self.getFavPlaylist()
-		self.getFavSongs()
-		# self.getRank()
+		# self.getFavSongs()
+		self.getRank2()
 
 if __name__ == "__main__":
 	music = Music()

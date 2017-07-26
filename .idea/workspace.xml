@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f964a53-b35f-44c0-8852-319d8481e35d" name="Default" comment="" />
+    <list default="true" id="0f964a53-b35f-44c0-8852-319d8481e35d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/music.163.com/music163.py" afterPath="$PROJECT_DIR$/music.163.com/music163.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +19,7 @@
     <SUITE FILE_PATH="coverage/Spider$xicidaili.coverage" NAME="xicidaili Coverage Results" MODIFIED="1500039800420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/www.xicidaili.com" />
     <SUITE FILE_PATH="coverage/Spider$ip__1_.coverage" NAME="ip (1) Coverage Results" MODIFIED="1499780923552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/www.smzdm.com" />
     <SUITE FILE_PATH="coverage/Spider$ip.coverage" NAME="ip Coverage Results" MODIFIED="1499781209804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Basis" />
-    <SUITE FILE_PATH="coverage/Spider$music163.coverage" NAME="music163 Coverage Results" MODIFIED="1500998374422" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/music.163.com" />
+    <SUITE FILE_PATH="coverage/Spider$music163.coverage" NAME="music163 Coverage Results" MODIFIED="1501082052833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/music.163.com" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -25,15 +27,25 @@
       <file leaf-file-name="music163.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/music.163.com/music163.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="113" column="26" lean-forward="true" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
+            <state relative-caret-position="360">
+              <caret line="92" column="29" lean-forward="true" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
                 <element signature="e#618#818#0" expanded="false" />
                 <element signature="e#846#1571#0" expanded="false" />
-                <element signature="e#3068#3280#0" expanded="false" />
-                <element signature="e#3304#4579#0" expanded="false" />
+                <element signature="e#2312#3043#0" expanded="false" />
+                <element signature="e#3729#5004#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="selenium_.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Basis/selenium_.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -499,7 +511,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="16" />
+      <option name="time" value="20" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -592,16 +604,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Basis/selenium_.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#30#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www.xicidaili.com/xicidaili.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
@@ -628,16 +630,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Basis/selenium_.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/music.163.com/music163.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="113" column="26" lean-forward="true" selection-start-line="113" selection-start-column="26" selection-end-line="113" selection-end-column="26" />
+        <state relative-caret-position="360">
+          <caret line="92" column="29" lean-forward="true" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
             <element signature="e#618#818#0" expanded="false" />
             <element signature="e#846#1571#0" expanded="false" />
-            <element signature="e#3068#3280#0" expanded="false" />
-            <element signature="e#3304#4579#0" expanded="false" />
+            <element signature="e#2312#3043#0" expanded="false" />
+            <element signature="e#3729#5004#0" expanded="false" />
           </folding>
         </state>
       </provider>
