@@ -10,7 +10,7 @@ import time
 class Xicidaili(object):
 
     def __init__(self):
-        self.base_url = "http://www.xicidaili.com/nn/"
+        self.base_url = "http://www.xicidaili.com/wt/"
         self.test_url = "http://www.cnblogs.com/juandx/p/5620126.html"
         self.set_timeout = 2
         self.IP_list = {}
@@ -43,7 +43,10 @@ class Xicidaili(object):
     def getRandomProxy(self):
         ip = random.choice(self.IP_list.keys())
         ip_type = self.IP_list[ip]
-        return {ip_type:ip}
+        if ip_type == 'http':
+            return {ip_type:ip}
+        else:
+            self.getRandomProxy()
 
     def main(self):
         soup = self.getSoup(self.base_url)
@@ -59,8 +62,9 @@ class Xicidaili(object):
         for i in xrange(1000):
             proxies = self.getRandomProxy()
             try:
-                response = requests.get('https://www.douban.com/group/shanghaizufang/', headers=self.headers, proxies=proxies, timeout=0.5)
-                print response
+                response = requests.get('http://www.whatismyip.com.tw/', headers=self.headers, proxies=proxies, timeout=0.5)
+                soup = BeautifulSoup(response.content, 'lxml')
+                print soup.select('b[style="font-size: 1.5em;"]')
             except:
                 pass
 
