@@ -2,6 +2,7 @@
 
 import requests
 import json
+import re
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
@@ -57,10 +58,10 @@ class Music(object):
 			# print urls.text
 			favourite_url = urls[0].get_attribute("href")
 			print favourite_url
-			print urls[1].get_attribute("href")
-			# print driver.page_source
 		except Exception as e:
 			print e
+		finally:
+			driver.quit()
 		# finally:
 		# 	driver.quit()
 
@@ -68,31 +69,46 @@ class Music(object):
 		driver = webdriver.PhantomJS("/Users/umi/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs")
 		driver.get(self.playlist_url)
 		driver.switch_to_frame('g_iframe')
-		m_table = driver.find_elements_by_xpath('//*[@class="j-flag"]/table/tbody/tr')
-		for m in m_table:
-			# print '|'.join(m.text.split('\n'))
-			no = m.find_element_by_xpath('./td[@class="left"]').text
-			song_id = m.find_element_by_xpath('.//div[@class="f-cb"]//a').get_attribute("href")
-			song_title = m.find_element_by_xpath('.//div[@class="f-cb"]//b').text
-			artist = m.find_element_by_xpath('.//div[@class="text"]/span').text
-			album_name = m.find_element_by_xpath('.//div[@class="text"]/a[last()]').text
-			print song_id
-			print no, song_title, artist, album_name
+		try:
+			m_table = driver.find_elements_by_xpath('//*[@class="j-flag"]/table/tbody/tr')
+			for m in m_table:
+				# print '|'.join(m.text.split('\n'))
+				no = m.find_element_by_xpath('./td[@class="left"]').text
+				song_id = m.find_element_by_xpath('.//div[@class="f-cb"]//a').get_attribute("href")
+				song_title = m.find_element_by_xpath('.//div[@class="f-cb"]//b').text
+				artist = m.find_element_by_xpath('.//div[@class="text"]/span').text
+				album_name = m.find_element_by_xpath('.//div[@class="text"]/a[last()]').text
+				print song_id
+				print no, song_title, artist, album_name
+		except Exception as e:
+			print e
+		finally:
+			driver.quit()
 
 	def getRank2(self):
 		# driver = webdriver.Chrome("/Users/umi/Downloads/chromedriver")
 		driver = webdriver.PhantomJS("/Users/umi/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs")
 		driver.get(self.rank_url)
 		driver.switch_to_frame('g_iframe')
-		wait = ui.WebDriverWait(driver, 15)
-		wait.until(lambda driver: driver.find_element_by_xpath('//div[@id="m-record"]/div/div/ul'))
-		span_songsall = driver.find_element_by_id('songsall')
-		span_songsall.click()
-		time.sleep(5)
-		songsall = driver.find_elements_by_xpath('//div[@id="m-record"]/div/div/ul/li')
-		for song in songsall:
-			print song.text
-			print song.get_attribute('id')
+		try:
+			wait = ui.WebDriverWait(driver, 15)
+			wait.until(lambda driver: driver.find_element_by_xpath('//div[@id="m-record"]/div/div/ul'))
+			span_songsall = driver.find_element_by_id('songsall')
+			span_songsall.click()
+			wait.until(lambda driver: driver.find_element_by_xpath('//div[@id="m-record"]/div/div/ul'))
+			songsall = driver.find_elements_by_xpath('//div[@id="m-record"]/div/div/ul/li')
+			for song in songsall:
+				no = re.sub('\D', '', song.find_element_by_xpath('.//span[@class="num"]').text)
+				song_url = song.find_element_by_xpath('.//span[@class="txt"]/a').get_attribute('href')
+				song_name = song.find_element_by_xpath('.//span[@class="txt"]/a').text
+				artist_url = song.find_element_by_xpath('.//span[@class="txt"]/span/span/a').get_attribute('href')
+				artist_name = song.find_element_by_xpath('.//span[@class="txt"]/span/span').text
+				song_score = re.sub('\D', '', song.find_element_by_xpath('./div[@class="tops"]/span').get_attribute('style'))
+				print no, song_name, artist_name, song_score
+		except Exception as e:
+			print e
+		finally:
+			driver.quit()
 		# print driver.page_source
 
 	def getRank(self):
@@ -121,8 +137,8 @@ class Music(object):
 
 	def main(self):
 		# self.getFavPlaylist()
-		# self.getFavSongs()
-		self.getRank2()
+		self.getFavSongs()
+		# self.getRank2()
 
 if __name__ == "__main__":
 	music = Music()
