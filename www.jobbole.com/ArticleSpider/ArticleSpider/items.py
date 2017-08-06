@@ -8,6 +8,8 @@
 import datetime
 
 import scrapy
+from scrapy.loader import ItemLoader
+from scrapy.loader.processors import TakeFirst
 
 
 def date_convert(value):
@@ -22,6 +24,10 @@ class ArticlespiderItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
+
+class ArticleItemLoader(ItemLoader):
+    # 自定义itemloader
+    default_output_processor = TakeFirst()
 
 class JobBoleArticleItem(scrapy.Item):
     title = scrapy.Field()

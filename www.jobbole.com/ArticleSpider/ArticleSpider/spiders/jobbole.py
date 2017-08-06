@@ -2,6 +2,7 @@
 import re
 import scrapy
 from scrapy import Request
+from scrapy.loader import ItemLoader
 from ArticleSpider.items import JobBoleArticleItem
 from ArticleSpider.utils.common import get_md5
 
@@ -54,36 +55,44 @@ class JobboleSpider(scrapy.Spider):
         # tag = ','.join(tag_list)
 
         # 通过css选择器提取字段
-        title = response.css(".entry-header h1::text").extract_first('')
-        front_image_url = response.meta.get("front_image_url", "")
-        create_date = response.css("p.entry-meta-hide-on-mobile::text").extract_first('').replace(u"·","").strip()
-        praise_nums = response.css(".vote-post-up h10::text").extract_first('')
-        fav_nums = response.css(".bookmark-btn::text").extract_first('')
-        fav_nums = re.sub('\D', '', fav_nums)
-        comment_nums = response.css("a[href='#article-comment'] span::text").extract_first('')
-        comment_nums = re.sub('\D', '', comment_nums)
-        content = response.css('div.entry').extract_first()
-        tag_list = response.css("p.entry-meta-hide-on-mobile a::text").extract()
-        tag_list = [element for element in tag_list if not element.strip().endswith(u'评论')]
-        tags = ','.join(tag_list)
-        print title
-        print front_image_url
-        print create_date
-        print praise_nums
-        print fav_nums
-        print comment_nums
-        # print tag_list
-        print tags
+        # title = response.css(".entry-header h1::text").extract_first('')
+        # front_image_url = response.meta.get("front_image_url", "")
+        # create_date = response.css("p.entry-meta-hide-on-mobile::text").extract_first('').replace(u"·","").strip()
+        # praise_nums = response.css(".vote-post-up h10::text").extract_first('')
+        # fav_nums = response.css(".bookmark-btn::text").extract_first('')
+        # fav_nums = re.sub('\D', '', fav_nums)
+        # comment_nums = response.css("a[href='#article-comment'] span::text").extract_first('')
+        # comment_nums = re.sub('\D', '', comment_nums)
+        # content = response.css('div.entry').extract_first()
+        # tag_list = response.css("p.entry-meta-hide-on-mobile a::text").extract()
+        # tag_list = [element for element in tag_list if not element.strip().endswith(u'评论')]
+        # tags = ','.join(tag_list)
+        #
+        # article_item["title"] = title
+        # article_item["url"] = response.url
+        # article_item["url_object_id"] = get_md5(response.url)
+        # article_item["create_date"] = create_date
+        # article_item["front_image_url"] = [front_image_url]
+        # article_item["praise_nums"] = praise_nums
+        # article_item["comment_nums"] = comment_nums
+        # article_item["fav_nums"] = fav_nums
+        # article_item["tags"] = tags
+        # article_item["content"] = content
 
-        article_item["title"] = title
-        article_item["url"] = response.url
-        article_item["url_object_id"] = get_md5(response.url)
-        article_item["create_date"] = create_date
-        article_item["front_image_url"] = [front_image_url]
-        article_item["praise_nums"] = praise_nums
-        article_item["comment_nums"] = comment_nums
-        article_item["fav_nums"] = fav_nums
-        article_item["tags"] = tags
-        article_item["content"] = content
+        # 通过item_loader加载item
+        front_image_url = response.meta.get("front_image_url", "")
+        item_loader = ItemLoader(item=JobBoleArticleItem(), response=response)
+        item_loader.add_css("title", ".entry-header h1::text")
+        item_loader.add_value("url", response.url)
+        item_loader.add_value("url_object_id", get_md5(response.url))
+        item_loader.add_css("create_date", "p.entry-meta-hide-on-mobile::text")
+        item_loader.add_value("front_image_url", [front_image_url])
+        item_loader.add_css("praise_nums", ".vote-post-up h10::text")
+        item_loader.add_css("comment_nums", "a[href='#article-comment'] span::text")
+        item_loader.add_css("fav_nums", ".bookmark-btn::text")
+        item_loader.add_css("tags", "p.entry-meta-hide-on-mobile a::text")
+        item_loader.add_css("content", "div.entry")
+        # 调用这个方法来对规则进行解析生成item对象
+        article_item = item_loader.load_item()
 
         yield article_item
