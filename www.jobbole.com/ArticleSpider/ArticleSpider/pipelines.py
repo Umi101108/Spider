@@ -20,10 +20,12 @@ class ArticlespiderPipeline(object):
 
 
 class ArticleImagePipeline(ImagesPipeline):
+    # 重新该方法可从result中获取到图片的实际下载地址
     def item_completed(self, results, item, info):
-        for ok, value in results:
-            image_file_path = value["path"]
-        item["front_image_path"] = image_file_path
+        if "front_image_url" in item:
+            for ok, value in results:
+                image_file_path = value["path"]
+            item["front_image_path"] = image_file_path
 
         return item
 
@@ -84,7 +86,7 @@ class MysqlTwistedPipline(object):
             db = settings["MYSQL_DBNAME"],
             user = settings["MYSQL_USER"],
             passwd = settings["MYSQL_PASSWORD"],
-            charset = 'utf8',
+            charset = 'utf8mb4',
             cursorclass = MySQLdb.cursors.DictCursor,
             use_unicode = True,
         )
@@ -94,7 +96,7 @@ class MysqlTwistedPipline(object):
 
     def process_item(self, item, spider):
         # 使用twisted将mysql插入变成异步执行
-        query = self.dbpool.Interaction(self.do_insert, item)
+        query = self.dbpool.runInteraction(self.do_insert, item)
         query.addErrback(self.handle_error, item, spider)  # 异常处理
 
     def handle_error(self, failure, item, spider):
@@ -104,5 +106,16 @@ class MysqlTwistedPipline(object):
     def do_insert(self, cursor, item):
         # 执行具体的插入
         # 根据不同的item构建不同的sql语句并插入到mysql中
-        insert_sql, params = item.get_insert_sql()
-        cursor.execute(insert_sql, params)
+        # insert_sql, params = item.get_insert_sql()
+        # print insert_sql, params
+        # cursor.execute(insert_sql, params)
+        insert_sql = """
+                    insert into jobbole_article(title, url, url_object_id, create_date, fav_nums, front_image_url, front_image_path,
+                    praise_nums, comment_nums, tags, content)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE fav_nums=VALUES(fav_nums)
+                """
+        cursor.execute(insert_sql, (
+        item["title"], item["url"], item["url_object_id"], item["create_date"], item["fav_nums"],
+        item["front_image_url"], item["front_image_path"], item["praise_nums"], item["comment_nums"], item["tags"],
+        item["content"]))
+        # self.conn.commit()

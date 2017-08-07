@@ -71,7 +71,8 @@ ITEM_PIPELINES = {
     # 'ArticleSpider.pipelines.ArticlespiderPipeline': 300,
     # 'ArticleSpider.pipelines.JsonWithEncodingPipeline': 2,
     # 'ArticleSpider.pipelines.JsonExporterPipeline': 2,
-    'ArticleSpider.pipelines.MysqlPipeline': 2,
+    # 'ArticleSpider.pipelines.MysqlPipeline': 2,
+    'ArticleSpider.pipelines.MysqlTwistedPipline': 2,
     # 'scrapy.piplines.images.ImagesPipeline': 1,
     'ArticleSpider.pipelines.ArticleImagePipeline': 1,
 }
