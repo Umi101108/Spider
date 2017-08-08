@@ -77,17 +77,20 @@ ITEM_PIPELINES = {
     'ArticleSpider.pipelines.ArticleImagePipeline': 1,
 }
 
+# 表示只下载大于100*100de tup
 # IMAGES_MIN_HEIGHT = 100
 # IMAGES_MIN_WIDTH = 100
+# 设置图片url的字段，scrapy将从item中找到此字段进行图片下载
 IMAGES_URLS_FIELD = "front_image_url"
+# 设置图片下载保存的目录
 project_dir = os.path.abspath(os.path.dirname(__file__))
 IMAGES_STORE = os.path.join(project_dir, 'images')
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+AUTOTHROTTLE_START_DELAY = 1
 # The maximum download delay to be set in case of high latencies
 #AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to

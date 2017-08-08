@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
+from urlparse import urljoin
 import scrapy
 from scrapy import Request
 from scrapy.loader import ItemLoader
@@ -26,6 +27,7 @@ class JobboleSpider(scrapy.Spider):
             image_url = post_node.css("img::attr(src)").extract_first()
             post_url = post_node.css("::attr(href)").extract_first()
             print image_url, post_url
+            image_url = urljoin("http://blog.jobbole.com/", image_url)
             # print urlparse(response.url, post_url)
 
             yield Request(post_url, meta={"front_image_url": image_url}, callback=self.parse_detail)
