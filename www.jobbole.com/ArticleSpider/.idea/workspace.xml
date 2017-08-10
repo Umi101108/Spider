@@ -14,91 +14,10 @@
     <SUITE FILE_PATH="coverage/ArticleSpider$common.coverage" NAME="common Coverage Results" MODIFIED="1502020077872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ArticleSpider/utils" />
     <SUITE FILE_PATH="coverage/ArticleSpider$jobbole.coverage" NAME="jobbole Coverage Results" MODIFIED="1502021443543" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ArticleSpider/spiders" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="jobbole.py" pinned="false" current-in-tab="false">
-              <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/spiders/jobbole.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="396">
-                    <caret line="28" column="63" lean-forward="false" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
-                    <folding>
-                      <element signature="e#24#33#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="items.py" pinned="false" current-in-tab="true">
-              <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/items.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="60">
-                    <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-                    <folding>
-                      <element signature="e#2823#4508#0" expanded="false" />
-                      <element signature="e#4551#5902#0" expanded="false" />
-                      <element signature="e#5935#5964#0" expanded="false" />
-                      <element signature="e#5995#6015#0" expanded="false" />
-                      <element signature="e#6048#6186#0" expanded="false" />
-                      <element signature="e#6230#6287#0" expanded="false" />
-                      <element signature="e#6326#7929#0" expanded="false" />
-                      <marker date="1490165338000" expanded="true" signature="2064:2324" ph="insert into jobbole_article... " />
-                      <marker date="1490165338000" expanded="true" signature="3236:3484" ph="insert into zhihu_question... " />
-                      <marker date="1490165338000" expanded="true" signature="3485:3663" ph="UPDATE conte... " />
-                      <marker date="1490165338000" expanded="true" signature="4973:5217" ph="insert into zhihu_answer... " />
-                      <marker date="1490165338000" expanded="true" signature="5218:5361" ph="UPDATE conte... " />
-                      <marker date="1490165338000" expanded="true" signature="7224:7532" ph="insert into lagou_job... " />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="common.py" pinned="false" current-in-tab="false">
-              <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/utils/common.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="176">
-                    <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-                    <folding>
-                      <element signature="e#45#59#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-              <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/settings.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="110">
-                    <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
-              <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/pipelines.py">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1584">
-                    <caret line="82" column="25" lean-forward="false" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="25" />
-                    <folding>
-                      <element signature="e#192#205#0" expanded="true" />
-                      <marker date="1490165338000" expanded="true" signature="1256:1354" ph="insert into jobbole_article... " />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="jobbole.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="jobbole.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/jobbole.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="154">
@@ -118,18 +37,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="27" column="14" lean-forward="false" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+            <state relative-caret-position="336">
+              <caret line="67" column="32" lean-forward="false" selection-start-line="67" selection-start-column="32" selection-end-line="67" selection-end-column="32" />
               <folding>
                 <element signature="e#25#38#0" expanded="true" />
                 <element signature="e#435#492#0" expanded="false" />
                 <element signature="e#869#1246#0" expanded="false" />
                 <element signature="e#1289#1735#0" expanded="false" />
-                <marker date="1502146314000" expanded="true" signature="2047:2326" ph="insert into jobbole_article... " />
-                <marker date="1502146314000" expanded="true" signature="3775:4071" ph="insert into jobbole_article... " />
+                <marker date="1502369686000" expanded="true" signature="2047:2326" ph="insert into jobbole_article... " />
+                <marker date="1502369686000" expanded="true" signature="3926:4222" ph="insert into jobbole_article... " />
               </folding>
             </state>
           </provider>
@@ -138,7 +57,7 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1628">
+            <state relative-caret-position="653">
               <caret line="74" column="53" lean-forward="false" selection-start-line="74" selection-start-column="53" selection-end-line="74" selection-end-column="53" />
               <folding />
             </state>
@@ -148,7 +67,7 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ArticleSpider/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1232">
+            <state relative-caret-position="323">
               <caret line="70" column="5" lean-forward="false" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
               <folding>
                 <element signature="e#152#167#0" expanded="true" />
@@ -192,9 +111,9 @@
         <option value="$PROJECT_DIR$/ArticleSpider/main.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/utils/common.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/items.py" />
-        <option value="$PROJECT_DIR$/ArticleSpider/pipelines.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/spiders/jobbole.py" />
         <option value="$PROJECT_DIR$/ArticleSpider/settings.py" />
+        <option value="$PROJECT_DIR$/ArticleSpider/pipelines.py" />
       </list>
     </option>
   </component>
@@ -205,10 +124,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1916" />
-    <option name="y" value="-252" />
-    <option name="width" value="1916" />
-    <option name="height" value="1036" />
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -225,7 +142,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -290,7 +207,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -298,6 +215,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -545,10 +463,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1916" y="-252" width="1916" height="1036" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.081941545" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12265625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -585,6 +502,68 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/jobbole.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/utils/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="14" lean-forward="false" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="27" column="14" lean-forward="false" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+          <folding>
+            <element signature="e#25#38#0" expanded="true" />
+            <element signature="e#435#492#0" expanded="false" />
+            <element signature="e#869#1246#0" expanded="false" />
+            <element signature="e#1289#1735#0" expanded="false" />
+            <marker date="1502369686000" expanded="true" signature="2047:2326" ph="insert into jobbole_article... " />
+            <marker date="1502369686000" expanded="true" signature="3926:4222" ph="insert into jobbole_article... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1628">
+          <caret line="74" column="53" lean-forward="false" selection-start-line="74" selection-start-column="53" selection-end-line="74" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1232">
+          <caret line="70" column="5" lean-forward="false" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+          <folding>
+            <element signature="e#152#167#0" expanded="true" />
+            <element signature="e#326#508#0" expanded="false" />
+            <element signature="e#540#552#0" expanded="false" />
+            <element signature="e#580#720#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#73#107#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ArticleSpider/spiders/jobbole.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="638">
@@ -641,8 +620,8 @@
             <element signature="e#435#492#0" expanded="false" />
             <element signature="e#869#1246#0" expanded="false" />
             <element signature="e#1289#1735#0" expanded="false" />
-            <marker date="1502146314000" expanded="true" signature="2047:2326" ph="insert into jobbole_article... " />
-            <marker date="1502146314000" expanded="true" signature="3775:4071" ph="insert into jobbole_article... " />
+            <marker date="1502369686000" expanded="true" signature="2047:2326" ph="insert into jobbole_article... " />
+            <marker date="1502369686000" expanded="true" signature="3926:4222" ph="insert into jobbole_article... " />
           </folding>
         </state>
       </provider>
@@ -673,7 +652,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -702,7 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-318">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -791,27 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ArticleSpider/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1232">
-          <caret line="70" column="5" lean-forward="false" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
-          <folding>
-            <element signature="e#152#167#0" expanded="true" />
-            <element signature="e#326#508#0" expanded="false" />
-            <element signature="e#540#552#0" expanded="false" />
-            <element signature="e#580#720#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ArticleSpider/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1628">
-          <caret line="74" column="53" lean-forward="false" selection-start-line="74" selection-start-column="53" selection-end-line="74" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/spiders/jobbole.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -828,25 +784,6 @@
           <caret line="8" column="33" lean-forward="false" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
           <folding>
             <element signature="e#45#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1584">
-          <caret line="82" column="25" lean-forward="false" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="25" />
-          <folding>
-            <element signature="e#192#205#0" expanded="true" />
-            <marker date="1490165338000" expanded="true" signature="1256:1354" ph="insert into jobbole_article... " />
           </folding>
         </state>
       </provider>
@@ -873,17 +810,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ArticleSpider/pipelines.py">
+    <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="27" column="14" lean-forward="false" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+        <state relative-caret-position="-1105">
+          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/python分布式爬虫打造搜索引擎(1)/g105gk/ArticleSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1129">
+          <caret line="82" column="25" lean-forward="false" selection-start-line="82" selection-start-column="15" selection-end-line="82" selection-end-column="25" />
           <folding>
-            <element signature="e#25#38#0" expanded="true" />
-            <element signature="e#435#492#0" expanded="false" />
-            <element signature="e#869#1246#0" expanded="false" />
-            <element signature="e#1289#1735#0" expanded="false" />
-            <marker date="1502146314000" expanded="true" signature="2047:2326" ph="insert into jobbole_article... " />
-            <marker date="1502146314000" expanded="true" signature="3775:4071" ph="insert into jobbole_article... " />
+            <element signature="e#192#205#0" expanded="true" />
+            <marker date="1490165338000" expanded="true" signature="1256:1354" ph="insert into jobbole_article... " />
           </folding>
         </state>
       </provider>
@@ -893,6 +834,42 @@
         <state relative-caret-position="154">
           <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="74" column="53" lean-forward="false" selection-start-line="74" selection-start-column="53" selection-end-line="74" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="70" column="5" lean-forward="false" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+          <folding>
+            <element signature="e#152#167#0" expanded="true" />
+            <element signature="e#326#508#0" expanded="false" />
+            <element signature="e#540#552#0" expanded="false" />
+            <element signature="e#580#720#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ArticleSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="67" column="32" lean-forward="false" selection-start-line="67" selection-start-column="32" selection-end-line="67" selection-end-column="32" />
+          <folding>
+            <element signature="e#25#38#0" expanded="true" />
+            <element signature="e#435#492#0" expanded="false" />
+            <element signature="e#869#1246#0" expanded="false" />
+            <element signature="e#1289#1735#0" expanded="false" />
+            <marker date="1502369686000" expanded="true" signature="2047:2326" ph="insert into jobbole_article... " />
+            <marker date="1502369686000" expanded="true" signature="3926:4222" ph="insert into jobbole_article... " />
+          </folding>
         </state>
       </provider>
     </entry>

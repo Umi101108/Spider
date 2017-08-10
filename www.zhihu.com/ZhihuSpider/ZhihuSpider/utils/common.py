@@ -2,6 +2,7 @@
 __author__ = 'umi'
 __date__ = '2017/8/9 下午9:57'
 
+import re
 
 def extract_num(text):
     # 从字符串中提取出数字

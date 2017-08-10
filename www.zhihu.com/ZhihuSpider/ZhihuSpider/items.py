@@ -36,9 +36,13 @@ class ZhihuQuestionItem(scrapy.Item):
         # 插入知乎question表的sql语句
         insert_sql = """
             INSERT INTO zhihu_question(zhihu_id, topics, url, title, content, answer_num, comments_num, watch_user_num, click_num, crawl_time)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE content=VALUES(content), answer_num=VALUES(answer_num), comments_num=VALUES(comments_num), watch_user_num=VALUES(watch_user_num), click_num=VALUES(click_num)
         """
+        # insert_sql = """
+        #             INSERT INTO zhihu_question(zhihu_id, topics, url)
+        #             VALUES (%s, %s, %s)
+        #             """
         zhihu_id = self["zhihu_id"][0]
         topics = ",".join(self["topics"])
         url = self["url"][0]
@@ -56,6 +60,9 @@ class ZhihuQuestionItem(scrapy.Item):
 
         crawl_time = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)
         params = (zhihu_id, topics, url, title, content, answer_num, comments_num, watch_user_num, click_num, crawl_time)
+        # params = (zhihu_id, topics, url)
+
+        print insert_sql
 
         return insert_sql, params
 
@@ -91,3 +98,5 @@ class ZhihuAnswerItem(scrapy.Item):
         )
 
         return insert_sql, params
+
+
