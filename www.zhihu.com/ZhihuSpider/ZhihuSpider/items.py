@@ -62,7 +62,7 @@ class ZhihuQuestionItem(scrapy.Item):
         params = (zhihu_id, topics, url, title, content, answer_num, comments_num, watch_user_num, click_num, crawl_time)
         # params = (zhihu_id, topics, url)
 
-        print insert_sql
+        # print insert_sql
 
         return insert_sql, params
 
@@ -76,7 +76,7 @@ class ZhihuAnswerItem(scrapy.Item):
     content = scrapy.Field()
     praise_num = scrapy.Field()
     comments_num = scrapy.Field()
-    create_num = scrapy.Field()
+    create_time = scrapy.Field()
     update_time = scrapy.Field()
     crawl_time = scrapy.Field()
 

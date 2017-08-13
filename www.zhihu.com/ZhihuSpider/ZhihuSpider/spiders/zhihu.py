@@ -140,13 +140,13 @@ class ZhihuSpider(scrapy.Spider):
         # else:
         #     # 处理老版本页面的item提取
         #     ma
-        # yield scrapy.Request(self.start_answer_url.format(question_id, 20, 0), headers=self.headers, callback=self.parse_answer)
+        yield scrapy.Request(self.start_answer_url.format(question_id, 20, 0), headers=self.headers, callback=self.parse_answer)
         yield question_item
 
 
     def parse_answer(self, response):
         # 处理question的answer
-        ans_json = json.load(response.text)
+        ans_json = json.loads(response.text)
         is_end = ans_json["paging"]["is_end"]
         next_url = ans_json["paging"]["next"]
 

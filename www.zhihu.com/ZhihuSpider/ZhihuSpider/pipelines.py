@@ -23,7 +23,7 @@ class MysqlPipeline(object):
     def do_insert(self, cursor, item):
         # 执行具体的插入
         insert_sql, params = item.get_insert_sql()
-        print insert_sql, params
+        # print insert_sql, params
         cursor.execute(insert_sql, params)
 
 
@@ -59,5 +59,5 @@ class MysqlTwistedPipline(object):
         #执行具体的插入
         #根据不同的item 构建不同的sql语句并插入到mysql中
         insert_sql, params = item.get_insert_sql()
-        print insert_sql, params
+        # print insert_sql, params
         cursor.execute(insert_sql, params)
