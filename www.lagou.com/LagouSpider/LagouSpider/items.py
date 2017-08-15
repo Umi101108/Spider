@@ -8,7 +8,8 @@
 from w3lib.html import remove_tags
 import scrapy
 from scrapy.loader import ItemLoader
-from scrapy.loader.processors import MapCompose, TakeFirst
+from scrapy.loader.processors import MapCompose, TakeFirst, Join
+from settings import SQL_DATETIME_FORMAT, SQL_DATE_FORMAT
 
 
 def remove_splash(value):
@@ -60,3 +61,20 @@ class LagouJobItem(scrapy.Item):
         input_processor = Join(",")
     )
     crawl_time = scrapy.Field()
+
+    def get_insert_sql(self):
+        insert_sql = """
+            insert into lagou_job(title, url, url_object_id, salary, job_city, work_years, degree_need,
+            job_type, publish_time, job_advantage, job_desc, job_addr, company_name, company_url,
+            tags, crawl_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE salary=VALUES(salary), job_desc=VALUES(job_desc)
+        """
+        params = (
+            self["title"], self["url"], self["url_object_id"], self["salary"], self["job_city"],
+            self["work_years"], self["degree_need"], self["job_type"],
+            self["publish_time"], self["job_advantage"], self["job_desc"],
+            self["job_addr"], self["company_name"], self["company_url"],
+            self["job_addr"], self["crawl_time"].strftime(SQL_DATETIME_FORMAT),
+        )
+        print insert_sql, params
+        return insert_sql, params
