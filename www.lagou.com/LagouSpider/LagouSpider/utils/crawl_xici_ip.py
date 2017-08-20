@@ -83,7 +83,7 @@ class GetIP(object):
         random_sql = """
             SELECT ip, port, proxy_type FROM proxy_ip
             ORDER BY RAND()
-            LIMIT 1
+            LIMIT 1000
         """
         result = cursor.execute(random_sql)
         for ip_info in cursor.fetchall():
@@ -93,12 +93,12 @@ class GetIP(object):
             print ip_info
 
             judge_re = self.judge_ip(ip, port, proxy_type)
-            if judge_re:
-                return "{0}://{1}:{2}".format(proxy_type, ip, port)
-            else:
-                return self.get_random_ip()
+            # if judge_re:
+            #     return "{0}://{1}:{2}".format(proxy_type, ip, port)
+            # else:
+            #     return self.get_random_ip()
 
 # crawl_ips()
 if __name__ == "__main__":
     get_ip = GetIP()
-    print get_ip.get_random_ip()
+    get_ip.get_random_ip()

@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'LagouSpider'))
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'LagouSpider (+http://www.yourdomain.com)'
+RANDOM_UA_TYPE = "random"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -62,7 +63,8 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    # 'LagouSpider.middlewares.MyCustomDownloaderMiddleware': 543,
-    'LagouSpider.middlewares.RandomUserAgentMiddleware': 1,
+   #  'LagouSpider.middlewares.RandomUserAgentMiddleware': 1,
+    'LagouSpider.middlewares.JSPageMiddleware': 1,
 }
 
 # Enable or disable extensions
@@ -73,9 +75,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'LagouSpider.pipelines.MysqlTwistedPipline': 1,
-}
+# ITEM_PIPELINES = {
+#    'LagouSpider.pipelines.MysqlTwistedPipline': 1,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -58,7 +58,7 @@ class Xicidaili(object):
             self.isAlive(ip_type, ip, port)
         for k, v in self.IP_list.iteritems():
             print k, v
-        
+
         for i in xrange(1000):
             proxies = self.getRandomProxy()
             try:
