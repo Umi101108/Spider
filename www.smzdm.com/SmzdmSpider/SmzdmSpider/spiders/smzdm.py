@@ -12,15 +12,20 @@ class SmzdmSpider(CrawlSpider):
     start_urls = ['http://www.smzdm.com/']
 
     rules = (
-        Rule(LinkExtractor(allow=("fenlei/.*",)), follow=True),
-        Rule(LinkExtractor(allow=("baoliao/.*",)), follow=True),
-        Rule(LinkExtractor(allow=r'p/\d+/'), callback='parse_post', follow=True),
+        # Rule(LinkExtractor(allow=("fenlei/.*",)), follow=True),
+        # Rule(LinkExtractor(allow=("baoliao/.*",)), follow=True),
+        Rule(LinkExtractor(allow=r'p/\d+/$'), callback='parse_article', follow=True),
+        Rule(LinkExtractor(allow=r'p/\d+/p\d+/'), callback='parse_comment', follow=True),
     )
 
     # def parse(self, response):
     #     pass
 
-    def parse_post(self, response):
+    # def parse_post(self, response):
+    #     # yield self.parse_article(response)
+    #     yield scrapy.Request(response.url, callback=self.parse_article)
+
+    def parse_article(self, response, follow=True):
         # 获取爆料内容
         article_title = response.css('.article_title > em[itemprop="name"]::text').extract_first("")
         ellipsis_author = response.css('.ellipsis.author > a::text').extract_first("")
@@ -41,7 +46,7 @@ class SmzdmSpider(CrawlSpider):
         tags = response.css('span.tags div::text').extract()
         tags = [tag.strip() for tag in tags if tag.strip()]
         tags = ','.join(tags)
-        print buy_url
+        print article_title, ellipsis_author, price, fav_num, comment_num
         # self.getTag(response)
         if response.css('.comment_wrap'):
             try:
@@ -60,6 +65,7 @@ class SmzdmSpider(CrawlSpider):
 
     def parse_comment(self, response):
         comments = response.css("div#commentTabBlockNew ul.comment_listBox li.comment_list")
+        print 23333
         for comment in comments:
             grey = comment.css('span::text').extract_first("")
             usmzdmid = comment.css('a.a_underline::attr(usmzdmid)').extract_first("")

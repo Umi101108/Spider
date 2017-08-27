@@ -111,7 +111,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1374" />
-    <option name="y" value="-258" />
+    <option name="y" value="-257" />
     <option name="width" value="1682" />
     <option name="height" value="1026" />
   </component>
@@ -456,7 +456,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1374" y="-258" width="1682" height="1026" extended-state="0" />
+    <frame x="-1374" y="-257" width="1682" height="1026" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11117717" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -515,7 +515,7 @@
         <state relative-caret-position="1496">
           <caret line="73" column="8" lean-forward="false" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
           <folding>
-            <element signature="e#195#206#0" expanded="true" />
+            <element signature="e#195#206#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -591,7 +591,7 @@
         <state relative-caret-position="418">
           <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
           <folding>
-            <element signature="e#75#86#0" expanded="true" />
+            <element signature="e#75#86#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -611,7 +611,7 @@
         <state relative-caret-position="1496">
           <caret line="73" column="8" lean-forward="false" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
           <folding>
-            <element signature="e#195#206#0" expanded="true" />
+            <element signature="e#195#206#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -778,7 +778,7 @@
         <state relative-caret-position="-292">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <element signature="e#75#86#0" expanded="true" />
+            <element signature="e#75#86#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -788,7 +788,7 @@
         <state relative-caret-position="680">
           <caret line="73" column="8" lean-forward="false" selection-start-line="73" selection-start-column="8" selection-end-line="73" selection-end-column="8" />
           <folding>
-            <element signature="e#195#206#0" expanded="true" />
+            <element signature="e#195#206#0" expanded="false" />
           </folding>
         </state>
       </provider>
