@@ -8,14 +8,14 @@ from scrapy.linkextractor import LinkExtractor
 # class SmzdmSpider(scrapy.Spider):
 class SmzdmSpider(CrawlSpider):
     name = 'smzdm'
-    allowed_domains = ['www.smzdm.com']
+    allowed_domains = ['smzdm.com']
     start_urls = ['http://www.smzdm.com/']
 
     rules = (
         # Rule(LinkExtractor(allow=("fenlei/.*",)), follow=True),
         # Rule(LinkExtractor(allow=("baoliao/.*",)), follow=True),
-        Rule(LinkExtractor(allow=r'p/\d+/$'), callback='parse_article', follow=True),
-        Rule(LinkExtractor(allow=r'p/\d+/p\d+/'), callback='parse_comment', follow=True),
+        Rule(LinkExtractor(allow=r'www.smzdm.com/p/\d+/$'), callback='parse_article', follow=True),
+        # Rule(LinkExtractor(allow=r'p/\d+/p\d+/'), callback='parse_comment', follow=True),
     )
 
     # def parse(self, response):
@@ -23,10 +23,11 @@ class SmzdmSpider(CrawlSpider):
 
     # def parse_post(self, response):
     #     # yield self.parse_article(response)
-    #     yield scrapy.Request(response.url, callback=self.parse_article)
+    #     yield scrapy.Request(response.url, callback=self.parse_article, dont_filter=True)
 
     def parse_article(self, response, follow=True):
         # 获取爆料内容
+        print 2333
         article_title = response.css('.article_title > em[itemprop="name"]::text').extract_first("")
         ellipsis_author = response.css('.ellipsis.author > a::text').extract_first("")
         ellipsis_author_id = response.css('.ellipsis.author > a::attr(href)').extract_first("")
@@ -55,17 +56,20 @@ class SmzdmSpider(CrawlSpider):
             except:
                 pageno = 1
 
-            for p in xrange(1, int(pageno)+1):
+            self.parse_comment(response)
+
+            for p in xrange(2, int(pageno)+1):
                 comment_url = response.url + 'p{}/'.format(str(p))
                 print comment_url
-                yield Request(url=comment_url, callback=self.parse_comment)
+                # self.parse_comment(response)
+                yield Request(url=comment_url, dont_filter=True, callback=self.parse_comment)
+                yield Request(url=comment_url, dont_filter=True, callback=self.parse_article)
         else:
             print "暂无评论"
 
 
-    def parse_comment(self, response):
+    def parse_comment(self, response, follow=True):
         comments = response.css("div#commentTabBlockNew ul.comment_listBox li.comment_list")
-        print 23333
         for comment in comments:
             grey = comment.css('span::text').extract_first("")
             usmzdmid = comment.css('a.a_underline::attr(usmzdmid)').extract_first("")
