@@ -10,9 +10,9 @@ from bs4 import BeautifulSoup
 class YaoZhi(object):
 
 	def __init__(self):
-		self.user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
+		self.user_agent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36"
 		self.cookies = ""
-		self.cookies = "UtzD_f52b_saltkey=AAE2a2iE; UtzD_f52b_lastvisit=1503983261; yaozh_mobile=1; yaozh_uidhas=1; ad_download=1; UtzD_f52b_ulastactivity=1498699308%7C0; PHPSESSID=jj0a2kl6ub78ft17ndn5pkil45; expire=1504227053337; UtzD_f52b_creditnotice=0D0D2D0D0D0D0D0D0D400818; UtzD_f52b_creditbase=0D0D6D0D0D0D0D0D0; UtzD_f52b_creditrule=%E6%AF%8F%E5%A4%A9%E7%99%BB%E5%BD%95; yaozh_logintime=1504158655; yaozh_user=418369%09%E4%B8%8A%E6%B5%B7%E5%81%A5%E6%99%B4%E4%BF%A1%E6%81%AF; yaozh_userId=418369; db_w_auth=400818%09%E4%B8%8A%E6%B5%B7%E5%81%A5%E6%99%B4%E4%BF%A1%E6%81%AF; UtzD_f52b_lastact=1504158665%09uc.php%09; UtzD_f52b_auth=bb18B%2FjxxhpZZ1wfB8fSXMjE0q1FsCV%2B1cuoLnURgWHrV33KhRwb78IHkW7MvzmNTPEQdRtqMUeIKXcWGTQzSmeeZ0Y; yaozh_mylogin=1504161343; _ga=GA1.2.1733785226.1503986776; _gid=GA1.2.175072032.1504080499; WAF_SESSION_ID=1ca244fb8ec96dc324a8ceacf4f0a8c1; think_language=zh-CN; _ga=GA1.3.1733785226.1503986776; _gat=1; Hm_lvt_65968db3ac154c3089d7f9a4cbb98c94=1503986776,1504003025,1504055893,1504140650; Hm_lpvt_65968db3ac154c3089d7f9a4cbb98c94=1504167774"
+		# self.cookies = "UtzD_f52b_saltkey=AAE2a2iE; UtzD_f52b_lastvisit=1503983261; yaozh_mobile=1; yaozh_uidhas=1; ad_download=1; UtzD_f52b_ulastactivity=1498699308%7C0; yaozh_logintime=1504158655; yaozh_user=418369%09%E4%B8%8A%E6%B5%B7%E5%81%A5%E6%99%B4%E4%BF%A1%E6%81%AF; yaozh_userId=418369; db_w_auth=400818%09%E4%B8%8A%E6%B5%B7%E5%81%A5%E6%99%B4%E4%BF%A1%E6%81%AF; UtzD_f52b_lastact=1504158665%09uc.php%09; UtzD_f52b_auth=bb18B%2FjxxhpZZ1wfB8fSXMjE0q1FsCV%2B1cuoLnURgWHrV33KhRwb78IHkW7MvzmNTPEQdRtqMUeIKXcWGTQzSmeeZ0Y; yaozh_mylogin=1504161343; _ga=GA1.2.1733785226.1503986776; _gid=GA1.2.175072032.1504080499; WAF_SESSION_ID=3906a4a6dd022688e5c82ab60ebdbc02; think_language=zh-CN; PHPSESSID=2lv1am5abvodc2j040acdm7sk2; has=1; expire=1504314675253; _gat=1; _ga=GA1.3.1733785226.1503986776; Hm_lvt_65968db3ac154c3089d7f9a4cbb98c94=1504003025,1504055893,1504140650,1504228185; Hm_lpvt_65968db3ac154c3089d7f9a4cbb98c94=1504229284"
 		self.headers = {'User-Agent': self.user_agent, 'Cookie': self.cookies}
 		try:
 			self.conn = MySQLdb.connect(
@@ -30,19 +30,34 @@ class YaoZhi(object):
 		self.yaopinjiage_url = "https://db.yaozh.com/yaopinjiage?firstjiage={}&p={}&pageSize=30&yearsecendend={}&yearsecendstr={}"
 
 
-	def getSoup(self, url):
-		response = requests.get(url, headers=self.headers, timeout=10)
+	def getSoup(self, url, retry=1):
+		response = requests.get(url, headers=self.headers, stream=True, timeout=20)
 		if response.status_code == 200:
 			html = response.content
 			soup = BeautifulSoup(html, 'lxml')
-			if soup.select('body[onload="challenge();"]'):
-				print 2333
-				time.sleep(random.randint(2, 10))
-				self.getSoup(response.url)
-			return soup
+			# if soup.select('body[onload="challenge();"]'):
+			# 	print 2333
+			# 	print response.url
+			# 	time.sleep(random.randint(60, 70))
+			# 	self.getSoup(response.url)
+			# elif soup.select('.responsive-table'):
+			# 	return soup
+			# soup
+			print soup
+			# print soup.select('table.table-striped')
+			if soup.select('table.table-striped'):
+				print 666
+				return soup
+			elif soup.select('body[onload="challenge();"]') or retry < 10:
+				print 233333
+				time.sleep(70)
+				retry += 1
+				self.getSoup(url, retry)
+			else:
+				print "无能为力"
 		else:
 			print "该网页不存在"
-			return 
+			return '???'
 
 	def insertData(self, table, my_dict):
 		try:
@@ -84,11 +99,11 @@ class YaoZhi(object):
 		max_page = int(data_total)/data_size + 1
 		return max_page
 
-	def getYearsecend(self):
+	def getYenarsecend(self):
 		secend = []
-		startyear = 2000
+		startyear = 2001
 		endyear = 2017
-		startmonth = 1
+		startmonth = 7
 		endmonth = 12
 		startday = 1
 		yearsecends = []
@@ -104,27 +119,28 @@ class YaoZhi(object):
 		table = "interaction2"
 		for i in xrange(p):
 			print i
-			try:
-				url = self.interaction_url.format(i, pagesize)
-				soup = self.getSoup(url)
-				info_list = soup.select('tbody tr')
-				for info in info_list:
-					# print info
-					ypmc = info.select('th')[0].get_text()
-					xhzydyp = info.select('td')[0].get_text()
-					zyxg = info.select('td')[1].get_text()
-					print ypmc, xhzydyp
-					content = {
-						"ypmc": ypmc,
-						"xhzydyp": xhzydyp,
-						"zyxg": zyxg
-					}
-					self.insertData(table, content)
-				time.sleep(random.randint(2, 8))
-			except:
-				time.sleep(10)
-			if i%10 == 0:
-				time.sleep(60)
+			# try:
+			url = self.interaction_url.format(i, pagesize)
+			soup = self.getSoup(url)
+			# print soup
+			info_list = soup.select('tbody tr')
+			for info in info_list:
+				# print info
+				ypmc = info.select('th')[0].get_text()
+				xhzydyp = info.select('td')[0].get_text()
+				zyxg = info.select('td')[1].get_text()
+				print ypmc, xhzydyp
+				content = {
+					"ypmc": ypmc,
+					"xhzydyp": xhzydyp,
+					"zyxg": zyxg
+				}
+				# self.insertData(table, content)
+			time.sleep(random.randint(2, 8))
+			# except:
+			# 	time.sleep(10)
+			# if i%13 == 0:
+			# 	time.sleep(1)
 		return 
 
 	def getYaopinjiage(self, jiage=32, p=3):
@@ -174,7 +190,8 @@ class YaoZhi(object):
 					except:
 						time.sleep(20)
 						pass
-				time.sleep(random.randint(2, 5))
+					time.sleep(random.randint(5, 13))
+				time.sleep(random.randint(12, 25))
 			except:
 				pass
 
