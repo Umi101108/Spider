@@ -98,3 +98,6 @@ MYSQL_HOST = "127.0.0.1"
 MYSQL_DBNAME = "smzdm"
 MYSQL_USER = "root"
 MYSQL_PASSWORD = "password"
+
+SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+SQL_DATE_FORMAT = "%Y-%m-%d"

@@ -119,6 +119,8 @@ class SmzdmSpider(CrawlSpider):
                 usmzdmid = comment.css('a.a_underline::attr(usmzdmid)').extract_first("")
                 author = comment.css('span[itemprop="author"]::text').extract_first("")
                 rank = comment.css('div.rank::attr(title)').extract_first("")
+                date = comment.css('.time meta::attr(content)').extract_first("")
+                # time = comment.css('.time::text').extract_first("")
                 comment_con = comment.css('div.comment_conWrap')[-1].css('div.comment_con span::text').extract_first("")
                 dingnum = comment.css('div.comment_action a.dingNum span::text').extract_first("")
                 cainum = comment.css('div.comment_action a.caiNum span::text').extract_first("")
@@ -173,6 +175,7 @@ class SmzdmSpider(CrawlSpider):
             author = comment.css('span[itemprop="author"]::text').extract_first("")
             rank = comment.css('div.rank::attr(title)').extract_first("")
             comment_con = comment.css('div.comment_conWrap')[-1].css('div.comment_con span::text').extract_first("")
+            come_from = comment.css('.come_from a::text').extract_first("")
             dingnum = comment.css('div.comment_action a.dingNum span::text').extract_first("")
             cainum = comment.css('div.comment_action a.caiNum span::text').extract_first("")
 
@@ -185,6 +188,7 @@ class SmzdmSpider(CrawlSpider):
             item_loader.add_value("author", author)
             item_loader.add_value("rank", rank)
             item_loader.add_value("comment_con", comment_con)
+            item_loader.add_value("come_from", come_from)
             item_loader.add_value("dingnum", dingnum)
             item_loader.add_value("cainum", cainum)
 
