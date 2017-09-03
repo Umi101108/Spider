@@ -48,11 +48,23 @@ def get_time(value):
         minutes = int(re.sub('\D', '', value))*60
     else:
         minutes = 0
-
     current_time = datetime.datetime.now() - datetime.timedelta(minutes=minutes)
+    return current_time.strftime(SQL_DATETIME_FORMAT)
 
-    return current_time
-
+def get_publish_time(value):
+    match_re_ymd = re.match(u".*?(\d{4}-\d{2}-\d{2} \d{2}:\d{2})", value)
+    match_re_md = re.match(u".*?(\d{2}-\d{2} \d{2}:\d{2})", value)
+    match_re_h = re.match(u".*?(\d{2}:\d{2})", value)
+    if match_re_ymd:
+        # publish_time = datetime.datetime.strptime(match_re_ymd.group(1), '%Y-%m-%d %H:%M')
+        publish_time = match_re_ymd.group(1)
+    elif match_re_md:
+        # publish_time = datetime.datetime.strptime(match_re_md.group(1), '%m-%d %H:%M')
+        publish_time = str(datetime.datetime.now().year) + "-"+ match_re_md.group(1)
+    elif match_re_h:
+        # publish_time = datetime.datetime.strptime(match_re_h.group(1), '%H:%M')
+        publish_time = str(datetime.datetime.now().strftime('%Y-%m-%d')) + " " + match_re_h.group(1)
+    return publish_time
 
 
 
