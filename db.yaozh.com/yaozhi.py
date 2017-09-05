@@ -5,6 +5,7 @@ import time
 import random
 import json
 import MySQLdb
+import datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
@@ -15,7 +16,7 @@ class YaoZhi(object):
 	def __init__(self):
 		self.user_agent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36"
 		self.cookies = ""
-		self.cookies = "UtzD_f52b_saltkey=AAE2a2iE; UtzD_f52b_lastvisit=1503983261; yaozh_mobile=1; yaozh_uidhas=1; ad_download=1; UtzD_f52b_ulastactivity=1498699308%7C0; yaozh_mylogin=1504161343; PHPSESSID=u91kn0ttes4lr5r07luuk467u3; expire=1504573461225; _ga=GA1.2.1733785226.1503986776; _gid=GA1.2.360414851.1504487155; yaozh_logintime=1504487145; yaozh_user=418369%09%E4%B8%8A%E6%B5%B7%E5%81%A5%E6%99%B4%E4%BF%A1%E6%81%AF; yaozh_userId=418369; db_w_auth=400818%09%E4%B8%8A%E6%B5%B7%E5%81%A5%E6%99%B4%E4%BF%A1%E6%81%AF; UtzD_f52b_creditnotice=0D0D2D0D0D0D0D0D0D400818; UtzD_f52b_creditbase=0D0D10D0D0D0D0D0D0; UtzD_f52b_creditrule=%E6%AF%8F%E5%A4%A9%E7%99%BB%E5%BD%95; UtzD_f52b_lastact=1504487146%09uc.php%09; UtzD_f52b_auth=5a07iRtHwIuLqYC4SGHDZMB3qGKwwRDEWGypygrxmog%2Bv35I3B0K6aqTQdaGsrA7py%2FSbdpf%2FUa7SVPc9hJVIIiBixY; think_language=zh-CN; zbpreid=; WAF_SESSION_ID=08d30abe81bf1c35b31c9362b052e2e7; _ga=GA1.3.1733785226.1503986776; Hm_lvt_65968db3ac154c3089d7f9a4cbb98c94=1504055893,1504140650,1504228185,1504487058; Hm_lpvt_65968db3ac154c3089d7f9a4cbb98c94=1504511570"
+		# self.cookies = "UtzD_f52b_saltkey=AAE2a2iE; UtzD_f52b_lastvisit=1503983261; yaozh_mobile=1; yaozh_uidhas=1; ad_download=1; UtzD_f52b_ulastactivity=1498699308%7C0; yaozh_mylogin=1504161343; think_language=zh-CN; PHPSESSID=utbg02lulugghe0j0c6q61qfg1; _ga=GA1.3.1733785226.1503986776; zbpreid=3981681%2C3981675%2C3981676; WAF_SESSION_ID=1218f621d552badae0158762dab4a65b; _gat=1; Hm_lvt_65968db3ac154c3089d7f9a4cbb98c94=1504140650,1504228185,1504487058,1504573398; Hm_lpvt_65968db3ac154c3089d7f9a4cbb98c94=1504576602; _ga=GA1.2.1733785226.1503986776; _gid=GA1.2.25194673.1504576602; yaozh_logintime=1504576594; yaozh_user=418369%09%E4%B8%8A%E6%B5%B7%E5%81%A5%E6%99%B4%E4%BF%A1%E6%81%AF; yaozh_userId=418369; db_w_auth=400818%09%E4%B8%8A%E6%B5%B7%E5%81%A5%E6%99%B4%E4%BF%A1%E6%81%AF; UtzD_f52b_creditnotice=0D0D2D0D0D0D0D0D0D400818; UtzD_f52b_creditbase=0D0D12D0D0D0D0D0D0; UtzD_f52b_creditrule=%E6%AF%8F%E5%A4%A9%E7%99%BB%E5%BD%95; UtzD_f52b_lastact=1504576595%09uc.php%09; UtzD_f52b_auth=243cfglJMtRAoaj70iZl8AzX1xS03aZV3U9epKhxVD%2BC1Bb7kRuYPSDh686oCp%2FuhBsoDYtxlABA8Hah%2B2kQHGKHrhk"
 		self.headers = {'User-Agent': self.user_agent, 'Cookie': self.cookies}
 		try:
 			self.conn = MySQLdb.connect(
@@ -31,7 +32,8 @@ class YaoZhi(object):
 		self.provinces = ["北京", "福建", "河南", "江苏", "江西", "上海", "天津", "浙江", "海南", "湖北", "湖南", "山东", "重庆", "广东", "贵州", "河北", "吉林", "辽宁", "宁夏", "山西", "安徽", "甘肃", "广西", "内蒙古", "青海", "陕西", "四川", "西藏", "新疆", "云南", "黑龙江", "国家"]
 		self.interaction_url = "https://db.yaozh.com/interaction?p={}&pageSize={}"
 		self.yaopinjiage_url = "https://db.yaozh.com/yaopinjiage?firstjiage={}&p={}&pageSize=30&yearsecendend={}&yearsecendstr={}"
-		self.yaopinzhongbiao_url = "https://db.yaozh.com/yaopinzhongbiao?first={province}&p={p}&pageSize=30&zb_approvaldateend={end}&zb_approvaldatestr={str}"
+		self.yaopinzhongbiao_url = "https://db.yaozh.com/yaopinzhongbiao?p={p}&pageSize=30&zb_approvaldateend={end}&zb_approvaldatestr={str}"
+		self.yibao_url = "https://db.yaozh.com/yibao/detail?type=yibao&id={}"
 
 
 	def getSoup(self, url, retry=1):
@@ -60,6 +62,25 @@ class YaoZhi(object):
 				time.sleep(70)
 				retry += 1
 				self.getSoup(url, retry)
+			else:
+				print "无能为力"
+		else:
+			print "该网页不存在"
+			return '???'
+
+	def getSoup2(self, url, retry=1):
+		response = requests.get(url, headers=self.headers, stream=True, timeout=15)
+		if response.status_code == 200:
+			html = response.content
+			soup = BeautifulSoup(html, 'lxml')
+			if soup.select('table.table'):
+				print 666
+				return soup
+			elif soup.select('body[onload="challenge();"]') or retry < 3:
+				print 233333
+				time.sleep(70)
+				retry += 1
+				self.getSoup2(url, retry)
 			else:
 				print "无能为力"
 		else:
@@ -106,21 +127,16 @@ class YaoZhi(object):
 		max_page = int(data_total)/data_size + 1
 		return max_page
 
-	def getYearsecend(self):
+	def getYearsecend(self, begin_date='2017-02-01', end_date='2017-09-05'):
 		secend = []
-		startyear = 2017
-		endyear = 2017
-		startmonth = 8
-		endmonth = 12
-		startday = 1
-		endday = 28
 		yearsecends = []
-		for y in xrange(startyear, endyear+1):
-			for m in xrange(startmonth, endmonth+1):
-				for d in xrange(startday, endday+1, 2):
-					date ='%d-%02d-%02d' % (y, m, d)
-					secend.append(date)
-		for s in xrange(len(secend)-1):
+		date = begin_date
+		dt = datetime.datetime.strptime(begin_date, "%Y-%m-%d")
+		while date <= end_date:
+			secend.append(date)
+			dt = dt + datetime.timedelta(1)
+			date = dt.strftime("%Y-%m-%d")
+		for s in xrange(0, len(secend)-2, 2):
 			yearsecends.append((secend[s],secend[s+1]))
 		return yearsecends
 
@@ -205,9 +221,9 @@ class YaoZhi(object):
 				pass
 
 
-	def getYaopinzhongbiao(self):
+	def getYaopinzhongbiao(self, url):
 		table = "yaopinzhongbiao"
-		url = self.yaopinzhongbiao_url
+		# url = self.yaopinzhongbiao_url
 		soup = self.getSoup(url)
 		info_list = soup.select('tbody tr')
 		for info in info_list:
@@ -227,7 +243,6 @@ class YaoZhi(object):
 			bz = info.select('td')[13].get_text()
 			lywj = info.select('td')[14].get_text()
 			lywj_url = info.select('td')[14].a.get('href', '') if info.select('td')[14].a else ''
-			print lywj_url
 			zscp = info.select('td')[15].get_text()
 			print id, yptym, spm, jx, gg, bzzhb, dw, zbj, zlcc, scqy, tbqy, zbsf, fbrq, bz, lywj, lywj_url
 			content = {
@@ -249,16 +264,32 @@ class YaoZhi(object):
 				"lywj_url": lywj_url,
 				"zscp": zscp
 			}
+			self.insertData(table, content)
 
 	def getYibao(self):
-		print 'yibao'
-		ybdq = soup.select()
-		bh = soup.select()
-		ypmc = soup.select()
-		ywmc = soup.select()
-		jx = soup.select()
-		yplb = soup.select()
-		yblx = soup.select()
+		table = 'yibao'
+		for i in xrange(1, 1000):
+			url = self.yibao_url.format(i)
+			try:
+				soup = self.getSoup2(url)
+				ybdq = soup.select('tbody tr td')[0].get_text("").replace("\n", "").strip()
+				bh = soup.select('tbody tr td')[1].get_text("").replace("\n", "").strip()
+				ypmc = soup.select('tbody tr td')[2].get_text("").replace("\n", "").strip()
+				jx = soup.select('tbody tr td')[3].get_text("").replace("\n", "").strip()
+				yplb = soup.select('tbody tr td')[4].get_text("").replace("\n", "").strip()
+				yblx = soup.select('tbody tr td')[5].get_text("").replace("\n", "").strip()
+				content = {
+					"ybdq": ybdq,
+					"bh": bh,
+					"ypmc": ypmc,
+					"jx": jx,
+					"yplb": yplb, 
+					"yblx": yblx
+				}
+				self.insertData(table, content)
+			except:
+				pass
+			time.sleep(2)
 
 	def getPageSource(self):
 		driver = webdriver.PhantomJS(r"E:\phantomjs-2.1.1-windows\phantomjs-2.1.1-windows\bin\phantomjs.exe")
@@ -272,24 +303,29 @@ class YaoZhi(object):
 
 
 	def main(self):
-		for startdate, enddate in self.getYearsecend():
+		for startdate, enddate in self.getYearsecend('2015-01-01', '2017-09-09'):
 			print startdate, enddate
-			for province in self.provinces:
-				url = self.yaopinzhongbiao_url.format(province=province, p=1, str=startdate, end=enddate)
-				print url
-				try:
-					max_page = self.getMaxpage(url)
-					print max_page
-				except:
-					pass
-							
+			# for province in self.provinces:
+			url = self.yaopinzhongbiao_url.format(p=1, str=startdate, end=enddate)
+			print url
+			try:
+				max_page = self.getMaxpage(url)
+				print max_page
+				for page in xrange(1, int(max_page)):
+					url = self.yaopinzhongbiao_url.format(p=page, str=startdate, end=enddate)
+					self.getYaopinzhongbiao(url)
+					time.sleep(2)
+			except:
+				pass
+			time.sleep(5)
+						
 
 
 if __name__ == "__main__":
 	yaozhi = YaoZhi()
 	# yaozhi.getInteraction()
-	url = yaozhi.interaction_url.format(2, 30)
-	# url = yaozhi.yaopinzhongbiao_url
+	# url = yaozhi.interaction_url.format(2, 30)
+	# url = "https://db.yaozh.com/yibao/detail?type=yibao&id=1"
 	# print url
 	# print yaozhi.getSoup(url)
 	# print yaozhi.getSoup(url).select('body[onload="challenge();"]')
@@ -298,4 +334,5 @@ if __name__ == "__main__":
 	# print yaozhi.getMaxpage(url)
 	# yaozhi.getYaopinzhongbiao()
 	# yaozhi.getPageSource()
-	yaozhi.main()
+	# yaozhi.main()
+	yaozhi.getYibao()
