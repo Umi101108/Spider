@@ -7,6 +7,7 @@
 import MySQLdb
 import MySQLdb.cursors
 from twisted.enterprise import adbapi
+import pymongo
 
 
 class SmzdmspiderPipeline(object):
@@ -48,3 +49,31 @@ class MysqlTwistedPipline(object):
         insert_sql, params = item.get_insert_sql()
         # print insert_sql % params
         cursor.execute(insert_sql, params)
+
+
+class MongoPipeline(object):
+
+    collection_name = 'scrapy_items'
+
+    def __init__(self, mongo_uri, mongo_db):
+        self.mongo_uri = mongo_uri
+        self.mongo_db = mongo_db
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            mongo_uri=crawler.settings.get('MONGO_URI'),
+            mongo_db=crawler.settings.get('MONGO_DATABASE', 'items')
+        )
+
+    def open_spider(self, spider):
+        self.client = pymongo.MongoClient(self.mongo_uri)
+        self.db = self.client[self.mongo_db]
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+        self.db[self.collection_name].insert(dict(item))
+        return item
+
