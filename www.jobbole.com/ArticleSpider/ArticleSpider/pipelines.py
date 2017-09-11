@@ -119,3 +119,13 @@ class MysqlTwistedPipline(object):
         item["front_image_url"], item["front_image_path"], item["praise_nums"], item["comment_nums"], item["tags"],
         item["content"]))
         # self.conn.commit()
+
+
+class ElasticsearchPipeline(object):
+    #将数据写入到es中
+
+    def process_item(self, item, spider):
+        #将item转换为es的数据
+        item.save_to_es()
+
+        return item

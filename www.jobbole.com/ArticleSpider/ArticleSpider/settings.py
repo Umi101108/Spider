@@ -72,12 +72,13 @@ ITEM_PIPELINES = {
     # 'ArticleSpider.pipelines.JsonWithEncodingPipeline': 2,
     # 'ArticleSpider.pipelines.JsonExporterPipeline': 2,
     # 'ArticleSpider.pipelines.MysqlPipeline': 2,
-    'ArticleSpider.pipelines.MysqlTwistedPipline': 2,
+    # 'ArticleSpider.pipelines.MysqlTwistedPipline': 2,
     # 'scrapy.piplines.images.ImagesPipeline': 1,
-    'ArticleSpider.pipelines.ArticleImagePipeline': 1,
+    'ArticleSpider.pipelines.ArticleImagePipeline': 2,
+    'ArticleSpider.pipelines.ElasticsearchPipeline': 1,
 }
 
-# 表示只下载大于100*100de tup
+# 表示只下载大于100*100的图片
 # IMAGES_MIN_HEIGHT = 100
 # IMAGES_MIN_WIDTH = 100
 # 设置图片url的字段，scrapy将从item中找到此字段进行图片下载
