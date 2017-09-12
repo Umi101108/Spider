@@ -120,7 +120,7 @@ class JobBoleArticleItem(scrapy.Item):
         article = ArticleType()
         article.title = self['title']
         article.create_date = self["create_date"]
-        article.content = self["content"]
+        article.content = remove_tags(self["content"][0])
         article.front_image_url = self["front_image_url"]
         if "front_image_path" in self:
             article.front_image_path = self["front_image_path"]
