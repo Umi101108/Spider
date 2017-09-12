@@ -7,8 +7,7 @@ import json
 import MySQLdb
 import datetime
 from bs4 import BeautifulSoup
-from selenium import webdriver
-import selenium.webdriver.support.ui as ui
+
 
 
 class YaoZhi(object):
@@ -22,8 +21,8 @@ class YaoZhi(object):
 			self.conn = MySQLdb.connect(
 					host = 'localhost',
 					port = 3306,
-					user = 'root', 
-					passwd = 'gt123456',
+					user = 'umi', 
+					passwd = '19930927yaozhi',
 					db = 'yaozhi'
 				)
 			self.cur = self.conn.cursor()
