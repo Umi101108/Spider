@@ -15,15 +15,20 @@ class Xianyu(object):
 		html = requests.get(self.user_url, headers=self.headers).text
 		soup = BeautifulSoup(html, 'lxml')
 		item_list = soup.select('.item-info')
+		n = 0
 		for item in item_list:
+			n += 1
 			href = 'https:' + item.a.get('href', '')
 			title = item.a.get('title')
 			desc = item.select('.item-brief-desc')[0].get_text()
 			pub_time =  item.select('.item-pub-time')[0].get_text()
 			location = item.select('.item-location')[0].get_text()
-			print href, title, desc, pub_time, location
+			print "*"*20, str(n)
+			print title, desc
+			print pub_time, location
 
 
 
 if __name__ == "__main__":
 	xianyu = Xianyu()
+	xianyu.getItem()
