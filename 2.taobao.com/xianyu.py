@@ -27,4 +27,3 @@ class Xianyu(object):
 
 if __name__ == "__main__":
 	xianyu = Xianyu()
-	xianyu.getItem()
