@@ -12,7 +12,7 @@ class DingdianSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        for i in xrange(1, 2):
+        for i in xrange(1, 10):
             url = self.base_url.format(str(i), '1')
             yield Request(url=url, callback=self.parse)
 
