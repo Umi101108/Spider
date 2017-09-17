@@ -24,16 +24,17 @@ class MzituSpider(CrawlSpider):
         # item["url"] = response.url
 
         max_pageno = response.css('.pagenavi span::text').extract()[-2]
-        print title, max_pageno
+        print title, max_pageno, response.url
         for pageno in xrange(1, int(max_pageno)+1):
             page_url = response.url + '/' + str(pageno)
-            yield Request(url=page_url, callback=self.img_urls, meta={"title": title, "url": response.url})
+            yield Request(url=page_url, callback=self.img_url, meta={"title": title, "url": response.url})
 
 
     def img_url(self, response):
         img_urls = response.css('.main-image img::attr(src)').extract()
         for img_url in img_urls:
             self.img_urls.append(img_url)
+            print img_url
         item = MzituspiderItem()
         item["title"] = response.meta["title"]
         item["url"] = response.meta["url"]

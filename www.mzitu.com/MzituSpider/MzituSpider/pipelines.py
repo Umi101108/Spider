@@ -10,7 +10,7 @@ from scrapy.pipelines.images import ImagesPipeline
 from scrapy.exceptions import DropItem
 
 def strip(path):
-    path = re.sub(r'[?\\*|"<>:/]', '', str(path))
+    path = re.sub(r'[？?\\*|"<>:/]', '', path)
     return path
 
 class MzituspiderPipeline(object):
@@ -29,13 +29,31 @@ class MyImagesPipeline(ImagesPipeline):
         return filename
 
     def get_media_requests(self, item, info):
-        for image_url in item['image_urls']:
+        for img_url in item['image_urls']:
             referer = item['url']
-            yield scrapy.Request(image_url, meta={'item': item, 'referer': referer})
+            yield scrapy.Request(url=img_url, meta={'item': item, 'referer': referer})
 
     def item_completed(self, results, item, info):
-        image_paths = [value['path'] for ok, value in results if ok]
+        image_paths = [x['path'] for ok, x in results if ok]
+        # for ok, value in results:
+        #     image_paths = value['path']
         if not image_paths:
             raise DropItem("Item contains no images")
-        item["image_path"] = image_paths
+        # item["image_path"] = image_paths
         return item
+
+class ArticleImagePipeline(ImagesPipeline):
+    def item_completed(self, results, item, info):
+        if "front_image_url" in item:
+            for ok, value in results:
+                image_file_path = value["path"]
+            item["front_image_path"] = image_file_path
+
+        return item
+
+
+if __name__ == "__main__":
+    a = u'我是一个？\*|“<>:/错误的字符串'.encode('utf8')
+    print(strip(a))
+    url = 'http://i.meizitu.net/2017/05/06b40.jpg'
+    print url.split('/')[-1]
