@@ -15,6 +15,12 @@ from scrapy.loader.processors import MapCompose, TakeFirst
 from settings import SQL_DATE_FORMAT, SQL_DATETIME_FORMAT
 
 
+def get_value(value):
+    if value:
+        return value
+    else:
+        return " "
+
 def get_num(value):
     match_re = re.match(".*?(\d+).*?", value)
     if match_re:
@@ -105,8 +111,10 @@ class SmzdmArticleItem(scrapy.Item):
     price = scrapy.Field()
     buy_url = scrapy.Field()
     price_currency = scrapy.Field()
-    price_detail = scrapy.Field()
-    content = scrapy.Field()
+    price_detail = scrapy.Field(
+        input_processor = MapCompose(remove_blank),
+    )
+    # content = scrapy.Field()
     fav_num = scrapy.Field(
         input_processor = MapCompose(get_num),
     )
@@ -128,20 +136,36 @@ class SmzdmArticleItem(scrapy.Item):
         insert_sql = """
             INSERT INTO article(article_id, article_url, article_title,
             ellipsis_author, ellipsis_author_id, update_time, price, price_currency, price_detail,
-            buy_url, content, fav_num, comment_num,
+            buy_url, fav_num, comment_num,
             rating_all_num, rating_worthy_num, rating_unworthy_num, crawl_time)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE fav_num=VALUES(fav_num), comment_num=VALUES(comment_num), rating_all_num=VALUES(rating_all_num), rating_worthy_num=VALUES(rating_worthy_num), rating_unworthy_num=VALUES(rating_unworthy_num)
         """
         crawl_time = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)
         params = (
             self["article_id"], self["article_url"], self["article_title"],
             self["ellipsis_author"], self["ellipsis_author_id"], self['update_time'], self["price"], self["price_currency"], self["price_detail"],
-            self["buy_url"], self["content"], self["fav_num"], self["comment_num"],
+            self["buy_url"], self["fav_num"], self["comment_num"],
             self["rating_all_num"], self["rating_worthy_num"], self["rating_unworthy_num"],
             crawl_time
         )
 
+        return insert_sql, params
+
+
+class SmzdmArticleContentItem(scrapy.Item):
+    # 构造爆料正文内容
+    article_id = scrapy.Field()
+    content = scrapy.Field()
+    def get_insert_sql(self):
+        insert_sql = """
+            INSERT INTO article_content(article_id, content)
+            VALUES (%s, %s)
+            ON DUPLICATE KEY UPDATE content=VALUES(content)
+        """
+        params = (
+            self["article_id"], self["content"]
+        )
         return insert_sql, params
 
 
@@ -210,7 +234,7 @@ class MemberItem(scrapy.Item):
     member_id = scrapy.Field()
     member_name = scrapy.Field()
     info_words = scrapy.Field(
-        input_processor = MapCompose(remove_blank),
+        input_processor = MapCompose(remove_blank, get_value),
     )
     yuanchuang = scrapy.Field(
         input_processor=MapCompose(get_num),

@@ -9,7 +9,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-from SmzdmSpider.items import SmzdmspiderItemLoader, SmzdmArticleItem, ArticleTagItem, CommentItem, MemberItem
+from SmzdmSpider.items import SmzdmspiderItemLoader, SmzdmArticleItem, SmzdmArticleContentItem, ArticleTagItem, CommentItem, MemberItem
 
 
 class SmzdmSpider(CrawlSpider):
@@ -22,7 +22,7 @@ class SmzdmSpider(CrawlSpider):
         # Rule(LinkExtractor(allow=("baoliao/.*",)), follow=True),
         Rule(LinkExtractor(allow=r'www.smzdm.com/p/\d+/$'), callback='parse_post', follow=True),
         # Rule(LinkExtractor(allow=r'www.smzdm.com/p/\d+/p\d+/'), callback='parse_comment', follow=True),
-        # Rule(LinkExtractor(allow=r'zhiyou.smzdm.com/member/\d+/$'), callback='parse_member', follow=True),
+        Rule(LinkExtractor(allow=r'zhiyou.smzdm.com/member/\d+/$'), callback='parse_member', follow=True),
     )
 
     def parse_post(self, response, follow=True):
@@ -42,8 +42,8 @@ class SmzdmSpider(CrawlSpider):
         item_loader.add_value("article_id", article_id)
         item_loader.add_css("article_title", '.article_title > em[itemprop="name"]::text')
         item_loader.add_value("article_url", response.url)
-        ellipsis_author = response.css('span[class="ellipsis author"] > a::text').extract_first("商家自荐")
-        ellipsis_author_id = response.css('.ellipsis.author > a::attr(href)').extract_first("商家自荐")
+        ellipsis_author = response.css('span[class="ellipsis author"] > a::text').extract_first("None")
+        ellipsis_author_id = response.css('.ellipsis.author > a::attr(href)').extract_first("None")
         item_loader.add_value("ellipsis_author", ellipsis_author)
         item_loader.add_value("ellipsis_author_id", ellipsis_author_id)
         item_loader.add_css("update_time", '.article_meta > span:last-child::text')
@@ -52,7 +52,7 @@ class SmzdmSpider(CrawlSpider):
         item_loader.add_css("price_currency", 'meta[itemprop="priceCurrency"]::attr(content)')
         item_loader.add_css("price_detail", 'em[itemprop="offers"] span.red::text')
         item_loader.add_css("buy_url", '.buy a::attr(href)')
-        item_loader.add_css("content", '.item-preferential')
+        # item_loader.add_css("content", '.item-preferential')
         item_loader.add_css("fav_num", 'div.leftLayer > a.fav em::text')
         item_loader.add_css("comment_num", 'div.leftLayer > a.comment em::text')
         item_loader.add_css("rating_all_num", '#rating_all_num em::text')
@@ -61,6 +61,12 @@ class SmzdmSpider(CrawlSpider):
 
         article_item = item_loader.load_item()
         yield article_item
+
+        item_loader2 = SmzdmspiderItemLoader(item=SmzdmArticleContentItem(), response=response)
+        item_loader2.add_value("article_id", article_id)
+        item_loader2.add_css("content", '.item-preferential')
+        article_content = item_loader2.load_item()
+        yield article_content
 
         # tags = response.css('span.tags div::text').extract()
         # tags = [tag.strip() for tag in tags if tag.strip()]
@@ -72,7 +78,6 @@ class SmzdmSpider(CrawlSpider):
             tag_url = tag.css('a::attr(href)').extract_first("")
             tag_detail = tag.css('a::text').extract_first("")
             tag_sort = tag.css('div div::text').extract_first("").split(u'：')[0] if tag.css('div div') else "暂无分类"
-            print tag_sort, tag_detail, tag_url
 
             tag_item["article_id"] = article_id
             tag_item["article_url"] = response.url
@@ -97,6 +102,8 @@ class SmzdmSpider(CrawlSpider):
             tag_item["tag_sort"] = tag_sort
             tag_item["tag_detail"] = tag_detail
             yield tag_item
+
+
 
     def parse_comment(self, response, follow=True):
         # print 233
