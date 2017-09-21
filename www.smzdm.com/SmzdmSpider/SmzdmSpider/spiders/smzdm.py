@@ -32,6 +32,7 @@ class SmzdmSpider(CrawlSpider):
             for comment in self.parse_comment(response):
                 yield comment
 
+
     def parse_article(self, response, follow=True):
         # 获取爆料内容
         match_obj = re.match(".*?www.smzdm.com/p/(\d+)/.*?", response.url)
@@ -86,9 +87,7 @@ class SmzdmSpider(CrawlSpider):
             yield tag_item
 
 
-
     def getTag(self, response, article_id):
-        print 2333
         tags = response.css('.meta-tags')
         for tag in tags:
             tag_item = ArticleTagItem()
@@ -104,9 +103,7 @@ class SmzdmSpider(CrawlSpider):
             yield tag_item
 
 
-
     def parse_comment(self, response, follow=True):
-        # print 233
         comments = response.css("div#commentTabBlockNew ul.comment_listBox li.comment_list")
         match_obj = re.match(".*?www.smzdm.com/p/(\d+)/.*?", response.url)
         if match_obj:

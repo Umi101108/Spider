@@ -22,7 +22,7 @@ def get_value(value):
         return " "
 
 def get_num(value):
-    match_re = re.match(".*?(\d+).*?", value)
+    match_re = re.match(".*?(\d+).*?", value, re.S)
     if match_re:
         num = int(match_re.group(1))
     else:
@@ -30,8 +30,8 @@ def get_num(value):
     return num
 
 def remove_blank(value):
-    title = ' '.join(value.split())
-    return title
+    # title = ' '.join(value.split())
+    return value.strip()
 
 def get_grey(value):
     match_re = re.match(".*?(\d+).*?", value)
@@ -83,11 +83,6 @@ def get_comment_time(value):
     # current_time = datetime.datetime.now() - datetime.timedelta(minutes=minutes)
     # comment_time = current_time.strftime(SQL_DATETIME_FORMAT)
     return comment_time
-
-
-
-
-
 
 
 class SmzdmspiderItemLoader(ItemLoader):
@@ -276,3 +271,9 @@ class MemberItem(scrapy.Item):
             self["yuanchuang"], self["wiki"], self["baoliao"], self["pingce"], self["qingdan"], self["comment"], self["second"]
         )
         return insert_sql, params
+
+if __name__ == "__main__":
+    s = """
+                9
+    """
+    print get_num(s)
