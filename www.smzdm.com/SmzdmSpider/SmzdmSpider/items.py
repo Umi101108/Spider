@@ -48,11 +48,14 @@ def get_grey(value):
     return value
 
 def get_publish_time(value):
-    match_re_ymd = re.match(u".*?(\d{4}-\d{2}-\d{2} \d{2}:\d{2})", value)
+    match_re_ymdh = re.match(u".*?(\d{4}-\d{2}-\d{2} \d{2}:\d{2})", value)
+    match_re_ymd = re.match(u".*?(\d{4}-\d{2}-\d{2})", value)
     match_re_md = re.match(u".*?(\d{2}-\d{2} \d{2}:\d{2})", value)
     match_re_h = re.match(u".*?(\d{2}:\d{2})", value)
-    if match_re_ymd:
+    if match_re_ymdh:
         # publish_time = datetime.datetime.strptime(match_re_ymd.group(1), '%Y-%m-%d %H:%M')
+        publish_time = match_re_ymdh.group(1)
+    elif match_re_ymd:
         publish_time = match_re_ymd.group(1)
     elif match_re_md:
         # publish_time = datetime.datetime.strptime(match_re_md.group(1), '%m-%d %H:%M')
@@ -277,3 +280,5 @@ if __name__ == "__main__":
                 9
     """
     print get_num(s)
+    t = "2013-09-20 08:55"
+    print get_comment_time(t)

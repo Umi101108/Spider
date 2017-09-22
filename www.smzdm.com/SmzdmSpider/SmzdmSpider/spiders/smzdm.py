@@ -43,8 +43,18 @@ class SmzdmSpider(CrawlSpider):
         item_loader.add_value("article_id", article_id)
         item_loader.add_css("article_title", '.article_title > em[itemprop="name"]::text')
         item_loader.add_value("article_url", response.url)
-        ellipsis_author = response.css('span[class="ellipsis author"] > a::text').extract_first("None")
-        ellipsis_author_id = response.css('.ellipsis.author > a::attr(href)').extract_first("None")
+        if response.css('.ellipsis.author'):
+            if response.css('.ellipsis.author > a::text'):
+                ellipsis_author = response.css('.ellipsis.author > a::text').extract_first("None")
+                ellipsis_author_id = response.css('.ellipsis.author > a::attr(href)').extract_first("None")
+            else:
+                ellipsis_author = "商家自荐"
+                ellipsis_author_id = "商家自荐"
+        else:
+            ellipsis_author = "None"
+            ellipsis_author_id = "None"
+        # ellipsis_author = response.css('.ellipsis.author > a::text').extract_first("None")
+        # ellipsis_author_id = response.css('.ellipsis.author > a::attr(href)').extract_first("None")
         item_loader.add_value("ellipsis_author", ellipsis_author)
         item_loader.add_value("ellipsis_author_id", ellipsis_author_id)
         item_loader.add_css("update_time", '.article_meta > span:last-child::text')
