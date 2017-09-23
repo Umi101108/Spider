@@ -41,6 +41,7 @@ class SmzdmSpider(CrawlSpider):
 
         item_loader = SmzdmspiderItemLoader(item=SmzdmArticleItem(), response=response)
         item_loader.add_value("article_id", article_id)
+        item_loader.add_css("article_channel", '#article_channel::attr(value)')
         item_loader.add_css("article_title", '.article_title > em[itemprop="name"]::text')
         item_loader.add_value("article_url", response.url)
         if response.css('.ellipsis.author'):
@@ -53,8 +54,6 @@ class SmzdmSpider(CrawlSpider):
         else:
             ellipsis_author = "None"
             ellipsis_author_id = "None"
-        # ellipsis_author = response.css('.ellipsis.author > a::text').extract_first("None")
-        # ellipsis_author_id = response.css('.ellipsis.author > a::attr(href)').extract_first("None")
         item_loader.add_value("ellipsis_author", ellipsis_author)
         item_loader.add_value("ellipsis_author_id", ellipsis_author_id)
         item_loader.add_css("update_time", '.article_meta > span:last-child::text')

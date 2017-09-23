@@ -98,6 +98,7 @@ class SmzdmArticleItem(scrapy.Item):
     # 构造爆料信息
     article_id = scrapy.Field()
     article_url = scrapy.Field()
+    article_channel = scrapy.Field()
     article_title = scrapy.Field(
         input_processor = MapCompose(remove_blank)
     )
@@ -132,16 +133,16 @@ class SmzdmArticleItem(scrapy.Item):
 
     def get_insert_sql(self):
         insert_sql = """
-            INSERT INTO article(article_id, article_url, article_title,
+            INSERT INTO article(article_id, article_url, article_channel, article_title,
             ellipsis_author, ellipsis_author_id, update_time, price, price_currency, price_detail,
             buy_url, fav_num, comment_num,
             rating_all_num, rating_worthy_num, rating_unworthy_num, crawl_time)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE fav_num=VALUES(fav_num), comment_num=VALUES(comment_num), rating_all_num=VALUES(rating_all_num), rating_worthy_num=VALUES(rating_worthy_num), rating_unworthy_num=VALUES(rating_unworthy_num)
         """
         crawl_time = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)
         params = (
-            self["article_id"], self["article_url"], self["article_title"],
+            self["article_id"], self["article_url"], self["article_channel"], self["article_title"],
             self["ellipsis_author"], self["ellipsis_author_id"], self['update_time'], self["price"], self["price_currency"], self["price_detail"],
             self["buy_url"], self["fav_num"], self["comment_num"],
             self["rating_all_num"], self["rating_worthy_num"], self["rating_unworthy_num"],
