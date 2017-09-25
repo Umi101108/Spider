@@ -24,7 +24,7 @@ ROBOTSTXT_OBEY = False
 # DUPEFILTER_DEBUG = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 1000
+CONCURRENT_REQUESTS = 100
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
@@ -32,8 +32,8 @@ CONCURRENT_REQUESTS = 1000
 # DOWNLOAD_DELAY = 3
 RANDOMIZE_DOWNLOAD_DELAY = True
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 16
+CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = True
@@ -70,10 +70,11 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    # 'SmzdmSpider.pipelines.SmzdmspiderPipeline': 300,
-    'SmzdmSpider.pipelines.MysqlTwistedPipline': 1
+    'SmzdmSpider.pipelines.MysqlTwistedPipline': 1,
+    'scrapy_redis.pipelines.RedisPipeline': 301,
 }
 
-CONCURRENT_ITEMS = 1000
+CONCURRENT_ITEMS = 100
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -90,11 +91,11 @@ CONCURRENT_ITEMS = 1000
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-#HTTPCACHE_ENABLED = True
+HTTPCACHE_ENABLED = True
 #HTTPCACHE_EXPIRATION_SECS = 0
-#HTTPCACHE_DIR = 'httpcache'
-#HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+# HTTPCACHE_DIR = 'httpcache'
+# HTTPCACHE_IGNORE_HTTP_CODES = []
+# HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 MYSQL_HOST = "127.0.0.1"
 MYSQL_DBNAME = "smzdm"
@@ -103,3 +104,21 @@ MYSQL_PASSWORD = "password"
 
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 SQL_DATE_FORMAT = "%Y-%m-%d"
+
+
+# 过滤器
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+# 调度器
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+
+# 调度状态持久化
+SCHEDULER_PERSIST = True
+
+# 请求调度使用优先队列
+SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
+
+# redis使用的端口和地址
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
+REDIS_URL = 'redis://:19930927@101.132.110.53:6379'

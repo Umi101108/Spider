@@ -6,8 +6,13 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 import random
+import json
+import redis
 from scrapy import signals
+from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
+from scrapy.downloadermiddlewares.retry import RetryMiddleware
 import settings
+
 
 
 class SmzdmspiderSpiderMiddleware(object):
