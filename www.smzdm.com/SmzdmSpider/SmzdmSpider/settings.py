@@ -97,10 +97,11 @@ HTTPCACHE_ENABLED = True
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MYSQL_HOST = "127.0.0.1"
+MYSQL_HOST = "101.132.110.53"
+MYSQL_PORT = 3307
 MYSQL_DBNAME = "smzdm"
 MYSQL_USER = "root"
-MYSQL_PASSWORD = "password"
+MYSQL_PASSWORD = "123456"
 
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 SQL_DATE_FORMAT = "%Y-%m-%d"
@@ -119,6 +120,6 @@ SCHEDULER_PERSIST = True
 SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
 
 # redis使用的端口和地址
-REDIS_HOST = '127.0.0.1'
+REDIS_HOST = ''
 REDIS_PORT = 6379
-REDIS_URL = 'redis://:19930927@101.132.110.53:6379'
+REDIS_URL = 'redis://:27@:'
