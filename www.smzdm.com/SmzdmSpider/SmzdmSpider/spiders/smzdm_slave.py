@@ -18,7 +18,7 @@ class SlaveSpider(RedisCrawlSpider):
     name = 'smzdm_slave'
     allowed_domains = ['smzdm.com']
     # start_urls = ['http://www.smzdm.com/']
-    redis_key = 'smzdmSpider:start_urls'
+    # redis_key = 'smzdmSpider:start_urls'
 
     rules = (
         # Rule(LinkExtractor(allow=("fenlei/.*",)), follow=True),
@@ -75,11 +75,11 @@ class SlaveSpider(RedisCrawlSpider):
         article_item = item_loader.load_item()
         yield article_item
 
-        item_loader2 = SmzdmspiderItemLoader(item=SmzdmArticleContentItem(), response=response)
-        item_loader2.add_value("article_id", article_id)
-        item_loader2.add_css("content", '.item-preferential')
-        article_content = item_loader2.load_item()
-        yield article_content
+        # item_loader2 = SmzdmspiderItemLoader(item=SmzdmArticleContentItem(), response=response)
+        # item_loader2.add_value("article_id", article_id)
+        # item_loader2.add_css("content", '.item-preferential')
+        # article_content = item_loader2.load_item()
+        # yield article_content
 
         # tags = response.css('span.tags div::text').extract()
         # tags = [tag.strip() for tag in tags if tag.strip()]
