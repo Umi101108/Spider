@@ -86,21 +86,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SmzdmSpider/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="122" column="23" lean-forward="false" selection-start-line="122" selection-start-column="23" selection-end-line="122" selection-end-column="23" />
+            <state relative-caret-position="202">
+              <caret line="118" column="12" lean-forward="true" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="smzdm_slave.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="smzdm_slave.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SmzdmSpider/spiders/smzdm_slave.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            <state relative-caret-position="165">
+              <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
                 <element signature="e#24#33#0" expanded="true" />
               </folding>
@@ -131,9 +131,9 @@
         <option value="$PROJECT_DIR$/SmzdmSpider/spiders/smzdm_redis.py" />
         <option value="$PROJECT_DIR$/SmzdmSpider/pipelines.py" />
         <option value="$PROJECT_DIR$/SmzdmSpider/spiders/smzdm_master.py" />
-        <option value="$PROJECT_DIR$/SmzdmSpider/settings.py" />
         <option value="$PROJECT_DIR$/SmzdmSpider/main.py" />
         <option value="$PROJECT_DIR$/SmzdmSpider/spiders/smzdm_slave.py" />
+        <option value="$PROJECT_DIR$/SmzdmSpider/settings.py" />
       </list>
     </option>
   </component>
@@ -468,7 +468,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21640626" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -845,32 +845,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmzdmSpider/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-740">
-          <caret line="28" column="42" lean-forward="false" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
-          <folding>
-            <element signature="e#192#206#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmzdmSpider/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1073">
           <caret line="61" column="36" lean-forward="false" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
           <folding>
             <element signature="e#168#181#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SmzdmSpider/spiders/smzdm_master.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-          <folding>
-            <element signature="e#24#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -894,14 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SmzdmSpider/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="122" column="23" lean-forward="false" selection-start-line="122" selection-start-column="23" selection-end-line="122" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SmzdmSpider/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -914,11 +886,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SmzdmSpider/spiders/smzdm_slave.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        <state relative-caret-position="165">
+          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
             <element signature="e#24#33#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmzdmSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-740">
+          <caret line="28" column="42" lean-forward="false" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+          <folding>
+            <element signature="e#192#206#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmzdmSpider/spiders/smzdm_master.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="24" column="38" lean-forward="true" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+          <folding>
+            <element signature="e#24#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SmzdmSpider/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="118" column="12" lean-forward="true" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -122,4 +122,4 @@ SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
 # redis使用的端口和地址
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
-# REDIS_URL = 'redis://:19930927@101.132.110.53:6379'
+# REDIS_URL = 'redis://:27@:6379'
