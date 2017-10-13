@@ -18,7 +18,6 @@ class SmzdmSpider(CrawlSpider):
     start_urls = ['http://www.smzdm.com/']
 
     rules = (
-        # Rule(LinkExtractor(allow=("fenlei/.*",)), follow=True),
         # Rule(LinkExtractor(allow=("baoliao/.*",)), follow=True),
         Rule(LinkExtractor(allow=r'www.smzdm.com/p/\d+/$'), callback='parse_post', follow=True),
         # Rule(LinkExtractor(allow=r'www.smzdm.com/p/\d+/p\d+/'), callback='parse_comment', follow=True),
