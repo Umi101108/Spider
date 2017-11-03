@@ -44,7 +44,6 @@ DEFAULT_REQUEST_HEADERS = {
   'Accept-Language': 'en',
   'Connection': 'keep-alive',
   'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
-  'Cookie': 'JSESSIONID=01866D3F5B4905ADBAF741D19AD3DD2E.7; FSSBBIl1UgzbN7N80S=loYc0cpbMhkLvUv8WvZd_Rh.VPE.79KXFKLQ7DZTs7VhmkEXl1Xh1Y9ut3F4ejQP; FSSBBIl1UgzbN7N80T=19uxPGWO5y_d05BlJZLEJlS93j6Z5PXDoQ6zUuUHBxDgXl2cYo6o2OmnHjPIs4pLsr6Zj7sSlOqp.LtspuKMeBNdWYreBNGKBCuxAY0NpnSBuEerZbcsQ786I_HwvDXq3TtMeeTeTse4lkblblKmL40rYKj78nYFsRME9cG6j9tG3sM045q_69ceRlZeaQqzu285tLQCtKlRzpBo1rxrlP21AOMzRxfYs1QAeLtJ..fMLaAMF9nhnyQlKlSVbE0gCTuY8QyAlbKTQoo_.vEuKwyE.PMPFQEwIUoXtGhOv4y6YTsvI6bJp5r61cuqRIo5t_Bl02eqM6NIE3Xm7auu8LIq9N2DepfhDuxUYfj8AStJfhG',
 }
 
 # Enable or disable spider middlewares
@@ -57,6 +56,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    'SfdaSpider.middlewares.JSPageMiddleware': 543,
+   # 'SfdaSpider.middlewares.PhantomJSDownloadHandler': 543,
 }
 
 # Enable or disable extensions
@@ -91,6 +91,12 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+DRIVER_PATH_C = "D:\chromedriver_win32\chromedriver.exe"
+# DRIVER_PATH_C = "/Users/umi/Downloads/chromedriver"
+DRIVER_PATH_P = r"D:\phantomjs-2.1.1-windows\bin\phantomjs.exe"
+# DRIVER_PATH_P = "/Users/umi/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs"
+
 
 MYSQL_HOST = "127.0.0.1"
 MYSQL_DBNAME = "product"

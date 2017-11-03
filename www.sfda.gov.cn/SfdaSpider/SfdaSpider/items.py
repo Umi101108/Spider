@@ -25,17 +25,17 @@ class GcypItem(scrapy.Item):
     sort = scrapy.Field()
     approvaldate = scrapy.Field()
     passnoreg0 = scrapy.Field()
-    standardcd = scrapy.Field()
+    standardcd0 = scrapy.Field()
     standardcdrmk = scrapy.Field()
 
     def get_insert_sql(self):
         insert_sql = """
-                INSERT INTO bc_productdb(passno, commonname, englishname, tradename, dosageform, specs, factory, factoryaddr, sort, approvaldate, passnoreg0, standardcd, standardcdrmk)
+                INSERT INTO bc_productdb(passno, commonname, englishname, tradename, dosageform, specs, factory, factoryaddr, sort, approvaldate, passnoreg0, standardcd0, standardcdrmk)
                 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
         params = (
             self["passno"], self["commonname"], self["englishname"], self["tradename"], self["dosageform"],
             self["specs"], self["factory"], self["factoryaddr"], self["sort"], self["approvaldate"],
-            self["passnoreg0"], self["standardcd"], self["standardcdrmk"]
+            self["passnoreg0"], self["standardcd0"], self["standardcdrmk"]
         )
         return insert_sql, params
