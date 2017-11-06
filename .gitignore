@@ -99,3 +99,11 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+*.xml
+
+*.xml
+
+*.xml
+
+www.sfda.gov.cn/SfdaSpider/.idea/workspace.xml
