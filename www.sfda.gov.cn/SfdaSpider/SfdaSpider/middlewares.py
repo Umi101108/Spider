@@ -18,13 +18,15 @@ from six.moves import queue
 from twisted.internet import defer, threads
 from twisted.python.failure import Failure
 
+from utils.crawl_xici_ip import GetIP
 
 class JSPageMiddleware(object):
 
     def __init__(self):
         # dcap =dict(DesiredCapabilities.CHROME)
         # dcap['']
-        self.driver = webdriver.Chrome(DRIVER_PATH_C)
+        # self.chrome_options = webdriver.ChromeOptions()
+        # self.driver = webdriver.Chrome(DRIVER_PATH_C)
         # dcap = dict(DesiredCapabilities.PHANTOMJS)
         # dcap["phantomjs.page.settings.userAgent"] = (
         #     "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36"
@@ -42,13 +44,23 @@ class JSPageMiddleware(object):
             self.driver.get(request.url)
             time.sleep(random.randint(2,5))
             self.driver.save_screenshot('1.png')
-
             return HtmlResponse(url=self.driver.current_url, body=self.driver.page_source, encoding="utf-8", request=request)
+        elif spider.name == "whatismyip":
+            print "访问：{0}".format(request.url)
+            ip = GetIP().get_random_ip()
+            print ip
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument(('--proxy-server='+ip))
+            driver = webdriver.Chrome(DRIVER_PATH_C, chrome_options=chrome_options)
+            driver.get(request.url)
+            time.sleep(random.randint(2,5))
+            return HtmlResponse(url=driver.current_url, body=driver.page_source, encoding="utf-8", request=request)
+
 
     def spider_closed(self, spider):
         # 当爬虫退出的时候关闭chrome
         print "spider closed"
-        self.driver.quit()
+        # self.driver.quit()
 
 
 # class PhantomJSDownloadHandler(object):
