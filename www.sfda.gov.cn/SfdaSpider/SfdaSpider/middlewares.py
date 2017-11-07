@@ -26,7 +26,7 @@ class JSPageMiddleware(object):
         # dcap =dict(DesiredCapabilities.CHROME)
         # dcap['']
         # self.chrome_options = webdriver.ChromeOptions()
-        # self.driver = webdriver.Chrome(DRIVER_PATH_C)
+        self.driver = webdriver.Chrome(DRIVER_PATH_C)
         # dcap = dict(DesiredCapabilities.PHANTOMJS)
         # dcap["phantomjs.page.settings.userAgent"] = (
         #     "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36"
@@ -47,10 +47,11 @@ class JSPageMiddleware(object):
             return HtmlResponse(url=self.driver.current_url, body=self.driver.page_source, encoding="utf-8", request=request)
         elif spider.name == "whatismyip":
             print "访问：{0}".format(request.url)
-            ip = GetIP().get_random_ip()
+            # ip = GetIP().get_random_ip()
+            ip = '183.190.26.154:80'
             print ip
             chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument(('--proxy-server='+ip))
+            chrome_options.add_argument('--proxy-server=http://%s' % ip)
             driver = webdriver.Chrome(DRIVER_PATH_C, chrome_options=chrome_options)
             driver.get(request.url)
             time.sleep(random.randint(2,5))

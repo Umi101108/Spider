@@ -4,7 +4,7 @@ from scrapy.http import Request
 
 class WhatismyipSpider(scrapy.Spider):
     name = 'whatismyip'
-    allowed_domains = ['whatismyip.com.tw/']
+    allowed_domains = ['whatismyip.com.tw']
     start_urls = ['http://www.whatismyip.com.tw/']
 
     def start_requests(self):
