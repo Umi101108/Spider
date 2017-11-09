@@ -14,13 +14,12 @@ class GcypSpider(scrapy.Spider):
     base_url = 'http://qy1.sfda.gov.cn/datasearch/face3/content.jsp?tableId=25&tableName=TABLE25&tableView=%B9%FA%B2%FA%D2%A9%C6%B7&Id={}'
 
     def start_requests(self):
-        for i in xrange(500, 800):
             url = self.base_url.format(str(i))
             yield Request(url=url, callback=self.parse)
 
     def parse(self, response):
         html = response.text
-        # print html
+        print html
         results = re.findall('<tr>.*?<td.*?>(.*?)</td>.*?<td.*?>(.*?)</td>.*?</tr>', html, re.S)
         raw = {}
         for r in results:

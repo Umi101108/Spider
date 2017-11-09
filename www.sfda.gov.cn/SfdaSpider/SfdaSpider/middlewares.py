@@ -43,6 +43,12 @@ class JSPageMiddleware(object):
             print "访问：{0}".format(request.url)
             self.driver.get(request.url)
             time.sleep(random.randint(2,5))
+            if self.driver.page_source == '<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body></body></html>':
+                self.driver.quit()
+                self.driver = webdriver.Chrome(DRIVER_PATH_C)
+                print "重新访问：{0}".format(request.url)
+                self.driver.get(request.url)
+                time.sleep(random.randint(2,5))
             self.driver.save_screenshot('1.png')
             return HtmlResponse(url=self.driver.current_url, body=self.driver.page_source, encoding="utf-8", request=request)
         elif spider.name == "whatismyip":
@@ -61,7 +67,7 @@ class JSPageMiddleware(object):
     def spider_closed(self, spider):
         # 当爬虫退出的时候关闭chrome
         print "spider closed"
-        # self.driver.quit()
+        self.driver.quit()
 
 
 # class PhantomJSDownloadHandler(object):
