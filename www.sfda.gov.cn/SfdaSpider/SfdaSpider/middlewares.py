@@ -60,7 +60,7 @@ class JSPageMiddleware(object):
             chrome_options.add_argument('--proxy-server=http://%s' % ip)
             driver = webdriver.Chrome(DRIVER_PATH_C, chrome_options=chrome_options)
             driver.get(request.url)
-            time.sleep(random.randint(2,5))
+            # time.sleep(random.randint(2,5))
             return HtmlResponse(url=driver.current_url, body=driver.page_source, encoding="utf-8", request=request)
 
 
