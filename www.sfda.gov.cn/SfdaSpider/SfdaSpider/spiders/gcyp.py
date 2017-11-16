@@ -14,7 +14,7 @@ class GcypSpider(scrapy.Spider):
     base_url = 'http://qy1.sfda.gov.cn/datasearch/face3/content.jsp?tableId=25&tableName=TABLE25&tableView=%B9%FA%B2%FA%D2%A9%C6%B7&Id={}'
 
     def start_requests(self):
-        for i in xrange(24000, 80000):
+        for i in xrange(76405, 90000):
             url = self.base_url.format(str(i))
             yield Request(url=url, callback=self.parse)
 
