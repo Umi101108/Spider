@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 
 class Xianyu(object):
 
-	def __init__(self):
-		self.user_url = "https://s.2.taobao.com/list/list.htm?spm=2007.1000337.18.6.80194d2372r4a&usernick=hzy_975"
+	def __init__(self, usernick):
+		self.user_url = "https://s.2.taobao.com/list/list.htm?spm=2007.1000337.18.6.80194d2372r4a&usernick={}".format(usernick)
 		self.user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
 		self.headers = {'User-Agent': self.user_agent}
 
@@ -24,11 +24,11 @@ class Xianyu(object):
 			pub_time =  item.select('.item-pub-time')[0].get_text()
 			location = item.select('.item-location')[0].get_text()
 			print "*"*20, str(n)
-			print title, desc
+			print title, desc, href
 			print pub_time, location
 
 
 
 if __name__ == "__main__":
-	xianyu = Xianyu()
+	xianyu = Xianyu('hzy_975')
 	xianyu.getItem()
