@@ -323,14 +323,6 @@ class YaoZhi(object):
 if __name__ == "__main__":
 	yaozhi = YaoZhi()
 	# yaozhi.getInteraction()
-	# url = yaozhi.interaction_url.format(2, 30)
-	# url = "https://db.yaozh.com/yibao/detail?type=yibao&id=1"
-	# print url
-	# print yaozhi.getSoup(url)
-	# print yaozhi.getSoup(url).select('body[onload="challenge();"]')
-	# yaozhi.getYaopinjiage()
-	# print yaozhi.getYearsecend()
-	# print yaozhi.getMaxpage(url)
 	# yaozhi.getYaopinzhongbiao()
 	# yaozhi.getPageSource()
 	# yaozhi.main()
