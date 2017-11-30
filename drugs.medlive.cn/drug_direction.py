@@ -26,7 +26,7 @@ class DrugDirection(object):
 		except MySQLdb.Error, e:
 			print "连接数据库错误，原因%d: %s" % (e.args[0], e.args[1])
 
-
+	# 下载指定页面的内容
 	def download(self, pageno):
 		url = self.base_url.format(pageno=str(pageno))
 		response = requests.get(url, headers=self.headers)
@@ -41,6 +41,7 @@ class DrugDirection(object):
 			print response.status_code
 			print 'error'
 
+	# 将字典插入数据库指定表中
 	def insertData(self, table, my_dict):
 		try:
 			self.conn.set_character_set('utf8')
@@ -57,14 +58,14 @@ class DrugDirection(object):
 					return 0
 			except MySQLdb.Error, e:
 				self.conn.rollback()
-				if "key ‘PRIMARY'" in e.args[1]:
+				if "key 'PRIMARY'" in e.args[1]:
 					print "数据已存在，未插入数据"
 				else:
 					print "数据插入失败，原因 %d: %s" % (e.args[0], e.args[1])
 		except MySQLdb.Error, e:
 			print "数据库错误，原因 %d: %s" % (e.args[0], e.args[1])
 
-
+	# 查找每一项父级节点的兄弟节点下的具体内容
 	def moreInformation(self, name):
 		if name is not None:
 			# print "has " + name['name']
@@ -73,6 +74,7 @@ class DrugDirection(object):
 		else:
 			return None
 
+	# 结构化说明书
 	def structure(self, line):
 		text = line[1]
 		# Soup = BeautifulSoup(text, 'lxml')
