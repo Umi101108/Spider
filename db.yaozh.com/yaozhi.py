@@ -21,7 +21,7 @@ class YaoZhi(object):
 			self.conn = MySQLdb.connect(
 					host = 'localhost',
 					port = 3306,
-					user = 'umi', 
+					user = 'umi',
 					passwd = '19930927yaozhi',
 					db = 'yaozhi'
 				)
@@ -165,7 +165,7 @@ class YaoZhi(object):
 			# 	time.sleep(10)
 			# if i%13 == 0:
 			# 	time.sleep(1)
-		return 
+		return
 
 	def getYaopinjiage(self, jiage=32, p=3):
 		table = "yaopinjiage"
@@ -211,7 +211,7 @@ class YaoZhi(object):
 								"wjh": wjh
 							}
 							self.insertData(table, content)
-					except:
+					except: 
 						time.sleep(20)
 						pass
 					time.sleep(random.randint(5, 13))
@@ -246,11 +246,11 @@ class YaoZhi(object):
 			print id, yptym, spm, jx, gg, bzzhb, dw, zbj, zlcc, scqy, tbqy, zbsf, fbrq, bz, lywj, lywj_url
 			content = {
 				"id": id,
-				"yptym": yptym, 
-				"spm": spm, 
+				"yptym": yptym,
+				"spm": spm,
 				"jx": jx,
 				"gg": gg,
-				"bzzhb": bzzhb, 
+				"bzzhb": bzzhb,
 				"dw": dw,
 				"zbj": zbj,
 				"zlcc": zlcc,
@@ -282,7 +282,7 @@ class YaoZhi(object):
 					"bh": bh,
 					"ypmc": ypmc,
 					"jx": jx,
-					"yplb": yplb, 
+					"yplb": yplb,
 					"yblx": yblx
 				}
 				self.insertData(table, content)
@@ -317,7 +317,7 @@ class YaoZhi(object):
 			except:
 				pass
 			time.sleep(5)
-						
+
 
 
 if __name__ == "__main__":
