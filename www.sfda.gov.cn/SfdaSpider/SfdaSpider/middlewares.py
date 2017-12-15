@@ -38,7 +38,7 @@ class JSPageMiddleware(object):
 
     # 通过chrome请求动态网页
     def process_request(self, request, spider):
-        if spider.name == "gcyp":
+        if spider.name == "gcyp" or spider.name == 'jkyp':
             # driver = webdriver.Chrome("/Users/umi/Downloads/chromedriver")
             print "访问：{0}".format(request.url)
             self.driver.get(request.url)
