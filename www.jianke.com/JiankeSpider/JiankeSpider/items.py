@@ -45,3 +45,18 @@ class DrugItem(scrapy.Item):
     registerno = scrapy.Field()
     importlicenceno = scrapy.Field()
     corporationname = scrapy.Field()
+
+    # def __init__(self):
+    #     COLUMNS = 'productid,standardcd,commonname,tradename,englishname,pinyin,warningsmarks,ingredients,characters,radioactivityandtime,actioncategory,indications,effectsandindications,specification,dosageandadministration,adversereactions,contraindications,warning,cautions,pregnancyandnursingmothers,pediatricuse,geriatricuse,list_interaction,overdosage,clinicaltrails,pharmacologicalandtoxicological,pharmacokinetics,storage,package,usefullife,implementstandard,approvalno,registerno,importlicenceno,corporationname'
+    #     for c in COLUMNS:
+    #         self[c] = scrapy.Field()
+
+    def get_insert_sql(self):
+        insert_sql = """
+                INSERT INTO bc_product_directiondb_copy(commonname)
+                VALUES(%s)
+                """
+        params = (
+            self['commonname'],
+        )
+        return insert_sql, params

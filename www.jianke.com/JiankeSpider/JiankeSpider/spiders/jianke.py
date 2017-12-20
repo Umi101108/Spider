@@ -13,7 +13,7 @@ class JiankeSpider(scrapy.Spider):
     base_url = 'http://www.jianke.com/product/{}.html'
 
     def start_requests(self):
-        for i in xrange(1, 2):
+        for i in xrange(1, 10):
             url = self.base_url.format(str(i))
             yield Request(url=url, callback=self.parse)
 
@@ -61,4 +61,4 @@ class JiankeSpider(scrapy.Spider):
         item['corporationname'] = raw.get(u'【生产企业】', '')
         for k, v in item.iteritems():
             print k, v
-        pass
+        yield item
