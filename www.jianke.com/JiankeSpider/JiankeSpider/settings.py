@@ -17,9 +17,12 @@ NEWSPIDER_MODULE = 'JiankeSpider.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'JiankeSpider (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
+
+RETRY_ENABLED = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -52,9 +55,10 @@ DOWNLOAD_DELAY = 3
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'JiankeSpider.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+# DOWNLOADER_MIDDLEWARES = {
+#    # 'JiankeSpider.middlewares.MyCustomDownloaderMiddleware': 543,
+#    # 'JiankeSpider.middlewares.LocalRetryMiddleware': 351,
+# }
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -64,9 +68,10 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'JiankeSpider.pipelines.JiankespiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   # 'JiankeSpider.pipelines.JiankespiderPipeline': 300,
+   'JiankeSpider.pipelines.MysqlTwistedPipline': 1,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

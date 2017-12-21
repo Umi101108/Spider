@@ -6,6 +6,7 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.downloadermiddlewares.retry import RetryMiddleware
 
 
 class JiankespiderSpiderMiddleware(object):
@@ -54,3 +55,11 @@ class JiankespiderSpiderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class LocalRetryMiddleware(RetryMiddleware):
+    def process_response(self, request, response, spider):
+        if response.status in [200]:
+            return response
+        else:
+            pass
