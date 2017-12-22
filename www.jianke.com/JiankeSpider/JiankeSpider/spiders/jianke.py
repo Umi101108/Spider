@@ -3,21 +3,30 @@ import re
 import scrapy
 from scrapy.http import Request
 from JiankeSpider.items import DrugItem
+from scrapy.linkextractors import LinkExtractor
+from scrapy.spiders import CrawlSpider, Rule
 
-
-class JiankeSpider(scrapy.Spider):
+class JiankeSpider(CrawlSpider):
     name = 'jianke'
     allowed_domains = ['jianke.com']
-    start_urls = ['http://jianke.com/']
+    start_urls = ['https://www.jianke.com/list-010301.html']
 
     base_url = 'https://www.jianke.com/product/{}.html'
 
-    def start_requests(self):
-        for i in xrange(1, 100000):
-            url = self.base_url.format(str(i))
-            yield Request(url=url, callback=self.parse)
+    rules = (
 
-    def parse(self, response):
+        Rule(LinkExtractor(allow=("https://www.jianke.com/list-01\d{2,4}.html",)), follow=True),
+        Rule(LinkExtractor(allow=("https://www.jianke.com/list-01\d{2,4}-0-\d{1,2}-0-1-0-0-0-0-0.html",)), follow=True),
+        Rule(LinkExtractor(allow=r'https://www.jianke.com/product/\d+.html'), callback='parse_drug', follow=True),
+    )
+
+    # def start_requests(self):
+    #     for i in xrange(10000, 20000):
+    #         url = self.base_url.format(str(i))
+    #         yield Request(url=url, callback=self.parse)
+
+
+    def parse_drug(self, response):
         direction = response.css('#b_2_2').extract_first()
         results = re.findall('<p>.*?<em>(.*?)</em>(.*?)</p>', direction, re.S)
         commonname = re.findall(u'通用名称：(.*?)</p>', direction, re.S)
@@ -27,6 +36,7 @@ class JiankeSpider(scrapy.Spider):
             raw[r[0]] = r[1]
 
         item = DrugItem()
+        item["productid"] = response.url.split('/')[-1].split('.')[0]
         item['commonname'] = ''.join(commonname)
         item['tradename'] = ''.join(tradename)
         item['warningsmarks'] = raw.get(u'【警示语】', '')
