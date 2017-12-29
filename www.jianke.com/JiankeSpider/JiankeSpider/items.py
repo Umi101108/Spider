@@ -49,7 +49,7 @@ class DrugItem(scrapy.Item):
 
     def get_insert_sql(self):
         insert_sql = """
-				INSERT INTO bc_product_directiondb_copy(productid, commonname, tradename, warningsmarks, ingredients, characters, radioactivityandtime, actioncategory, indications, specification, dosageandadministration, adversereactions, contraindications, warning, cautions, pregnancyandnursingmothers, pediatricuse, geriatricuse, list_interaction, overdosage, clinicaltrails, pharmacologicalandtoxicological, pharmacokinetics, storage, package, usefullife, implementstandard, approvalno, registerno, importlicenceno, corporationname)
+				INSERT INTO 4_bc_product_directiondb_copy(productid, commonname, tradename, warningsmarks, ingredients, characters, radioactivityandtime, actioncategory, indications, specification, dosageandadministration, adversereactions, contraindications, warning, cautions, pregnancyandnursingmothers, pediatricuse, geriatricuse, list_interaction, overdosage, clinicaltrails, pharmacologicalandtoxicological, pharmacokinetics, storage, package, usefullife, implementstandard, approvalno, registerno, importlicenceno, corporationname)
 				VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
 				"""
         params = (
