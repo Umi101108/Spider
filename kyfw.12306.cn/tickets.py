@@ -34,6 +34,7 @@ class TrainsCollection(object):
 		self.base_url = 'https://kyfw.12306.cn/otn/leftTicket/queryZ?leftTicketDTO.train_date={date}&leftTicketDTO.from_station={from_station}&leftTicketDTO.to_station={to_station}&purpose_codes=ADULT'
 		self.header = '车次 车站 时间 历时 商务座 一等 二等 软卧 硬卧 硬座 无座'.split()
 		self.show_list = 'station_train_code station_interval time_interval lishi swz_num ydz_num edz_num rw_num yw_num yz_num wz_num'.split()
+		self.ticket_list = 'swz_num ydz_num edz_num rw_num yw_num yz_num wz_num'.split()
 
 
 	def all_trains(self, available_trains):
@@ -46,11 +47,11 @@ class TrainsCollection(object):
 				'start_station_name': self.reverse_station[data[4]], # 起始站名称
 				'end_station_telecode': data[5],  # 终点站编码
 				'end_station_name': self.reverse_station[data[5]],  # 终点站名称
-				'station_interval': self.reverse_station[data[4]] +'-'+ self.reverse_station[data[5]],  # 行程区间
 				'from_station_telecode': data[6],  # 出发站编码
 				'from_station_name': self.reverse_station[data[6]],  # 出发站名称
 				'to_station_telecode': data[7],  # 到达站编码
 				'to_station_name': self.reverse_station[data[7]],  # 到达站名称
+				'station_interval': self.reverse_station[data[6]] + '-' + self.reverse_station[data[7]],  # 行程区间
 				'start_time': data[8],  # 出发时间
 				'arrive_time': data[9],  # 到达时间
 				'time_interval': data[8] +'-'+ data[9],  # 时间区间
@@ -79,30 +80,60 @@ class TrainsCollection(object):
 			pt.add_row(l)
 		print pt
 
-	def filter_trains(self, trains):
-		begin_time = 6
-		end_time = 20
-		options = ['G']
-		for train in trains:
-			if train.get('station_train_code')[0] in options:
-				if train.get('edz_num') != u'无' and train.get('edz_num') != '':
-					if int(train.get('start_time').split(':')[0]) > begin_time and int(train.get('arrive_time').split(':')[0]) < end_time:
-						print train.get('station_train_code')
+	def turn_to_list(self, train):
+		l = []
+		for col in self.show_list:
+			l.append(train.get(col))
+		return l
 
-	def get_result(self, from_station='上海', to_station='杭州', date='2018-02-12', options=[]):
-		url = self.base_url.format(date=date, from_station=station.get(from_station), to_station=station.get(to_station))
-		response = requests.get(url, verify=False)
-		result = response.json()['data']['result']
-		return result
+	def print_train_information(self, train):
+		string = "{station_train_code}列车，{station_interval}，时间{time_interval}，历时{lishi}，还有余票，赶快抢！".format(
+			station_train_code = train.get('station_train_code'),
+			station_interval = train.get('station_interval'),
+			time_interval = train.get('time_interval'),
+			lishi = train.get('lishi'),
+		)
+		string = string.decode('utf8')+ u'车票信息：' + u'， '.join(map(lambda col: col+' '+train.get(col), [col for col in self.ticket_list if train.get(col)!=u'无' and train.get(col)!='']))
+		return string
+
+	def filter_trains(self, trains, options=[], begin_time=0, end_time=24):
+		filter_trains = []
+		for train in trains:
+			if not options or train.get('station_train_code')[0] in options:
+				tickets_left = 0
+				for col in self.ticket_list:
+					if train.get(col) != u'无' and train.get(col) != '':
+						tickets_left = 1
+				if tickets_left:
+					if int(train.get('start_time').split(':')[0]) >= begin_time and int(train.get('arrive_time').split(':')[0]) < end_time:
+						# print str(self.turn_to_list(train)).decode('string_escape')
+						filter_trains.append(train)
+		return filter_trains
+
+	def get_result(self, from_station='上海', to_station='杭州', date='2018-02-12'):
+		attempts = 0
+		success = False
+		while attempts < 10 and not success:
+			try:
+				url = self.base_url.format(date=date, from_station=station.get(from_station), to_station=station.get(to_station))
+				response = requests.get(url, verify=False)
+				print url
+				result = response.json()['data']['result']
+				return result
+			except:
+				attempts += 1
+				if attempts == 10:
+					return []
+				time.sleep(2)
 
 	def main(self, from_station='上海', to_station='杭州', date='2018-02-12', options=[]):
 		result = self.get_result(from_station, to_station, date)
 		trains = self.all_trains(result)
-		for train in trains:
-			for k, v in train.iteritems():
-				print k, v
-		self.pretty_print(trains)
-		self.filter_trains(trains)
+		if trains != []:
+			trains = self.filter_trains(trains, options)
+			return trains
+		else:
+			print  '请求失效'
 
 
 
@@ -112,4 +143,4 @@ if __name__ == '__main__':
 	to_station = arguments['<to>']
 	date = arguments['<date>']
 	options = [key[-1].upper() for key, value in arguments.items() if value is True]
-	TrainsCollection().main(from_station, to_station, date)
+	TrainsCollection().main(from_station, to_station, date, options)

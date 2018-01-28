@@ -108,3 +108,7 @@ ENV/
 
 www.sfda.gov.cn/SfdaSpider/.idea/workspace.xml
 *.xml
+
+*.pkl
+
+*.xml
