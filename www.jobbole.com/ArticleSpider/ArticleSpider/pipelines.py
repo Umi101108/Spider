@@ -110,7 +110,7 @@ class MysqlTwistedPipline(object):
         # print insert_sql, params
         # cursor.execute(insert_sql, params)
         insert_sql = """
-                    insert into jobbole_article(title, url, url_object_id, create_date, fav_nums, front_image_url, front_image_path,
+                    insert into jobbole_article_copy(title, url, url_object_id, create_date, fav_nums, front_image_url, front_image_path,
                     praise_nums, comment_nums, tags, content)
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE fav_nums=VALUES(fav_nums)
                 """

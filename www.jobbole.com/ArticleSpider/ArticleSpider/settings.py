@@ -72,10 +72,10 @@ ITEM_PIPELINES = {
     # 'ArticleSpider.pipelines.JsonWithEncodingPipeline': 2,
     # 'ArticleSpider.pipelines.JsonExporterPipeline': 2,
     # 'ArticleSpider.pipelines.MysqlPipeline': 2,
-    # 'ArticleSpider.pipelines.MysqlTwistedPipline': 2,
+    'ArticleSpider.pipelines.MysqlTwistedPipline': 2,
     # 'scrapy.piplines.images.ImagesPipeline': 1,
-    'ArticleSpider.pipelines.ArticleImagePipeline': 2,
-    'ArticleSpider.pipelines.ElasticsearchPipeline': 1,
+    'ArticleSpider.pipelines.ArticleImagePipeline': 1,
+    # 'ArticleSpider.pipelines.ElasticsearchPipeline': 1,
 }
 
 # 表示只下载大于100*100的图片
@@ -89,9 +89,9 @@ IMAGES_STORE = os.path.join(project_dir, 'images')
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
-AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = False
 # The initial download delay
-AUTOTHROTTLE_START_DELAY = 1
+# AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
 #AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to

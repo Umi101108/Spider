@@ -11,7 +11,7 @@ import re
 import redis
 import scrapy
 from scrapy.loader import ItemLoader
-from scrapy.loader.processors import TakeFirst, MapCompose, Join
+from scrapy.loader.processors import TakeFirst, MapCompose, Join, Identity
 
 from w3lib.html import remove_tags
 from models.es_type import ArticleType
@@ -22,7 +22,7 @@ redis_cli = redis.StrictRedis()
 
 def date_convert(value):
     try:
-        create_date = datetime.datetime.strptime(value, "%Y/%m%d").date()
+        create_date = datetime.datetime.strptime(value.replace(u'·', '').strip(), "%Y/%m/%d").date()
     except Exception as e:
         create_date = datetime.datetime.now().date()
 
@@ -34,12 +34,13 @@ def return_value(value):
 
 
 def get_nums(value):
+    if value == '' or value == []:
+        value = 0
     match_re = re.match(".*?(\d+).*?", value)
     if match_re:
         nums = int(match_re.group(1))
     else:
         nums = 0
-
     return nums
 
 
@@ -80,6 +81,13 @@ class ArticleItemLoader(ItemLoader):
     # 自定义itemloader
     default_output_processor = TakeFirst()
 
+
+class Remove_tag(Identity):
+
+    def __call__(self, values):
+        return [tag for tag in values if u"评论" not in tag]
+
+
 class JobBoleArticleItem(scrapy.Item):
     title = scrapy.Field()
     create_date = scrapy.Field(
@@ -103,7 +111,8 @@ class JobBoleArticleItem(scrapy.Item):
     )
     content = scrapy.Field()
     tags = scrapy.Field(
-        input_processor = MapCompose(remove_comment_tags),
+        # input_processor = MapCompose(remove_comment_tags),
+        input_processor = Remove_tag(),
         output_processor = Join(",")
     )
 
@@ -113,7 +122,6 @@ class JobBoleArticleItem(scrapy.Item):
             VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE content=VALUES(fav_nums)
         """
         params = (self["title"], self["url"], self["create_date"], self["fav_nums"])
-
         return insert_sql, params
 
     def save_to_es(self):
