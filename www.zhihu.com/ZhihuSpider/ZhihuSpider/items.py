@@ -6,11 +6,23 @@
 # http://doc.scrapy.org/en/latest/topics/items.html
 
 import datetime
+import re
 
 import scrapy
+from scrapy.loader.processors import MapCompose
 
 from settings import SQL_DATETIME_FORMAT
 from utils.common import extract_num
+
+
+def get_num(value):
+    match_re = re.match(".*?(\d+).*?", value.replace(u',', ''), re.S)
+    if match_re:
+        num = int(match_re.group(1))
+    else:
+        num = 0
+    return num
+
 
 
 class ZhihuspiderItem(scrapy.Item):
@@ -26,7 +38,9 @@ class ZhihuQuestionItem(scrapy.Item):
     url = scrapy.Field()
     title = scrapy.Field()
     content = scrapy.Field()
-    answer_num = scrapy.Field()
+    answer_num = scrapy.Field(
+        input_processor = MapCompose(get_num)
+    )
     comments_num = scrapy.Field()
     watch_user_num = scrapy.Field()
     click_num = scrapy.Field()
@@ -37,18 +51,20 @@ class ZhihuQuestionItem(scrapy.Item):
         insert_sql = """
             INSERT INTO zhihu_question(zhihu_id, topics, url, title, content, answer_num, comments_num, watch_user_num, click_num, crawl_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ON DUPLICATE KEY UPDATE content=VALUES(content), answer_num=VALUES(answer_num), comments_num=VALUES(comments_num), watch_user_num=VALUES(watch_user_num), click_num=VALUES(click_num)
+            ON DUPLICATE KEY 
+            UPDATE content=VALUES(content), answer_num=VALUES(answer_num), comments_num=VALUES(comments_num), watch_user_num=VALUES(watch_user_num), click_num=VALUES(click_num)
         """
-        # insert_sql = """
-        #             INSERT INTO zhihu_question(zhihu_id, topics, url)
-        #             VALUES (%s, %s, %s)
-        #             """
         zhihu_id = self["zhihu_id"][0]
         topics = ",".join(self["topics"])
         url = self["url"][0]
         title = "".join(self["title"])
         content = "".join(self["content"])
-        answer_num = extract_num("".join(self["answer_num"]))
+        # answer_num = extract_num("".join(self["answer_num"]))
+        try:
+            answer_num = self["answer_num"][0]
+        except:
+            answer_num = 0
+        # answer_num = self["answer_num"][0] if self["answer_num"][0] else 0
         comments_num = extract_num("".join(self["comments_num"]))
 
         if len(self["watch_user_num"]) == 2:
@@ -60,9 +76,6 @@ class ZhihuQuestionItem(scrapy.Item):
 
         crawl_time = datetime.datetime.now().strftime(SQL_DATETIME_FORMAT)
         params = (zhihu_id, topics, url, title, content, answer_num, comments_num, watch_user_num, click_num, crawl_time)
-        # params = (zhihu_id, topics, url)
-
-        # print insert_sql
 
         return insert_sql, params
 
@@ -85,7 +98,8 @@ class ZhihuAnswerItem(scrapy.Item):
         insert_sql = """
             INSERT INTO zhihu_answer(zhihu_id, url, question_id, author_id, content, praise_num, comments_num, create_time, update_time, crawl_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
-            ON DUPLICATE KEY UPDATE content=VALUES(content), comments_num=VALUES(comments_num), praise_num=VALUES(praise_num), update_time=VALUES(update_time)
+            ON DUPLICATE KEY 
+            UPDATE content=VALUES(content), comments_num=VALUES(comments_num), praise_num=VALUES(praise_num), update_time=VALUES(update_time)
         """
 
         create_time = datetime.datetime.fromtimestamp(self["create_time"]).strftime(SQL_DATETIME_FORMAT)

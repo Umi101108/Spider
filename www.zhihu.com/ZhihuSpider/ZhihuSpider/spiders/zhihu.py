@@ -23,7 +23,7 @@ class ZhihuSpider(scrapy.Spider):
     headers = {
         "HOST": "www.zhihu.com",
         "Referer": "https://www.zhihu.com",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36",
     }
 
     def start_requests(self):
@@ -39,15 +39,15 @@ class ZhihuSpider(scrapy.Spider):
 
         if xsrf:
             post_url = "https://www.zhihu.com/login/phone_num"
-            post_data = {
-                "_xsrf": xsrf,
-                "phone_num": "13175810927",
-                "password": "5PN-Dsu-BMg-RLf",
-            }
-            t = str(int(time.time())*1000)
-            captcha_url = "https://www.zhihu.com/captcha.gif?r={0}&type=login".format(t)
-            # 请求验证码并回调login_after_captcha
-            yield scrapy.Request(captcha_url, headers=self.headers, meta={"post_data": post_data}, callback=self.login_after_captcha)
+        post_data = {
+            "_xsrf": xsrf,
+            "phone_num": "13175810927",
+            "password": "5PN-Dsu-BMg-RLf",
+        }
+        t = str(int(time.time())*1000)
+        captcha_url = "https://www.zhihu.com/captcha.gif?r={0}&type=login".format(t)
+        # 请求验证码并回调login_after_captcha
+        yield scrapy.Request(captcha_url, headers=self.headers, meta={"post_data": post_data}, callback=self.login_after_captcha)
 
     def login_after_captcha(self, response):
         with open("captcha.jpg", "wb") as f:
@@ -76,6 +76,7 @@ class ZhihuSpider(scrapy.Spider):
                 yield scrapy.Request(url, dont_filter=True, headers=self.headers)
 
 
+
     def parse(self, response):
         """
         提取出html页面的所有url，并跟踪这些url进行一步爬取
@@ -83,6 +84,7 @@ class ZhihuSpider(scrapy.Spider):
         :param response: 
         :return: 
         """
+
         all_urls = response.css("a::attr(href)").extract()
         all_urls = [urljoin(response.url, url) for url in all_urls]
         # 使用lambda函数对每一个url进行过滤，如果是true放回列表，如果是false则去除
@@ -113,7 +115,7 @@ class ZhihuSpider(scrapy.Spider):
             item_loader.add_value("zhihu_id", question_id)
             item_loader.add_css("answer_num", ".List-headerText span::text")
             item_loader.add_css("comments_num", ".QuestionHeader-Comment button::text")
-            item_loader.add_css("watch_user_num", ".NumberBoard-value::text")
+            item_loader.add_css("watch_user_num", ".NumberBoard-itemValue::attr(title)")
             item_loader.add_css("topics", ".QuestionHeader-topics .Popover div::text")
 
             question_item = item_loader.load_item()
@@ -137,9 +139,7 @@ class ZhihuSpider(scrapy.Spider):
             item_loader.add_css("topics", ".zm-tag-editor-labels a::text")
 
             question_item = item_loader.load_item()
-        # else:
-        #     # 处理老版本页面的item提取
-        #     ma
+
         yield scrapy.Request(self.start_answer_url.format(question_id, 20, 0), headers=self.headers, callback=self.parse_answer)
         yield question_item
 
@@ -148,6 +148,7 @@ class ZhihuSpider(scrapy.Spider):
         # 处理question的answer
         ans_json = json.loads(response.text)
         is_end = ans_json["paging"]["is_end"]
+        totals_answer = ans_json["paging"]["totals"]
         next_url = ans_json["paging"]["next"]
 
         # 提取answer的具体字段

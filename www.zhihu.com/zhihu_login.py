@@ -2,10 +2,15 @@
 
 import requests
 import re
-import cookielib
+
+try:
+    import cookielib
+except:
+    import http.cookiejar as cookielib
 
 session = requests.session()
 session.cookies = cookielib.LWPCookieJar(filename="cookies.txt")
+
 try:
     session.cookies.load(ignore_discard=True)
 except:
@@ -20,8 +25,8 @@ headers = {
 
 def is_login():
     # 通过个人中心页面返回状态码来判断是否为登录状态
-    inbox_url = "https://www.zhihu.com/question/56250357/answer/148534773"
-    response = session.get(inbox_url, headers=headers, allow_redirects=True)
+    inbox_url = "https://www.zhihu.com/inbox"
+    response = session.get(inbox_url, headers=headers, allow_redirects=False)
     # print response.text
     with open("index_page.html", "wb") as f:
         f.write(response.text.encode("utf-8"))
@@ -93,4 +98,4 @@ def zhihu_login(account, password):
 # print is_login()
 # print get_captcha()
 # print get_xsrf()
-# zhihu_login("13175810927", "5PN-Dsu-BMg-RLf")
+zhihu_login("13175810927", "5PN-Dsu-BMg-RLf")
