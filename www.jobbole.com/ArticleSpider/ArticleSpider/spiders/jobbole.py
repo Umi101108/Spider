@@ -4,6 +4,8 @@ from urlparse import urljoin
 import scrapy
 from scrapy import Request
 from scrapy.loader import ItemLoader
+from scrapy.xlib.pydispatch import dispatcher
+from scrapy import signals
 from ArticleSpider.items import JobBoleArticleItem, ArticleItemLoader
 from ArticleSpider.utils.common import get_md5
 
@@ -15,11 +17,26 @@ class JobboleSpider(scrapy.Spider):
         'http://blog.jobbole.com/all-posts/',
     )
 
+    # 收集伯乐在线所有404的url以及404页面
+    handle_httpstatus_list = [404, 301]
+
+    def __init__(self):
+        self.fail_urls = []
+        dispatcher.connect(self.handle_spider_closed, signals.spider_closed)
+
+    def handle_spider_closed(self, spider, reason):
+        self.crawler.stats.set_value("failed_urls", ",".join(self.fail_urls))
+        pass
+
+
     def parse(self, response):
         """
         1. 获取文章列表页中的文章url并交给scrapy下载后并进行解析
         2. 获取下一页的url并交给scrapy进行下载，下载完成后交给parse
         """
+        if response.status == 404:
+            self.fail_urls.append(response.url)
+            self.crawler.stats.inc_value("failed_url")
 
         # 解析列表页的所有文章url并交给scrapy下载后并进行解析
         post_nodes = response.css('#archive .floated-thumb .post-thumb a')
