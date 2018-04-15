@@ -17,7 +17,7 @@ def crawl_ips():
     # 爬取西刺的免费ip代理
     headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"}
     for i in xrange(10):
-        response = requests.get("http://www.xicidaili.com/nn/{0}".format(i), headers=headers, proxies=proxies)
+        response = requests.get("http://www.xicidaili.com/nn/{0}".format(i), headers=headers)
         selector = Selector(text=response.text)
         all_trs = selector.css('#ip_list tr')
 
@@ -37,7 +37,7 @@ def crawl_ips():
         for ip_info in ip_list:
             print ip_info
             # spped = ip_info[3]
-            insert_sql = "INSERT INTO proxy_ip(ip, port, proxy_type, speed) VALUES ('{0}', '{1}', '{2}', {3})".format(ip_info[0], ip_info[1], ip_info[2], ip_info[3])
+            insert_sql = "INSERT INTO proxy_ip(ip, port, proxy_type, speed) VALUES ('{0}', '{1}', '{2}', {3})".format(ip_info[0], ip_info[1], ip_info[2].lower(), ip_info[3])
             print insert_sql
             cursor.execute(insert_sql)
             conn.commit()
@@ -58,15 +58,18 @@ class GetIP(object):
     def judge_ip(self, ip, port, proxy_type):
         # 判断ip是否可用
         http_url = "http://www.baidu.com"
+        # http_url = "http://www.whatismyip.com.tw/"
+        headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"}
         proxy_url = "{0}://{1}:{2}".format(proxy_type, ip, port)
         try:
             proxy_dict = {
                 proxy_type: proxy_url,
             }
-            response = requests.get(http_url, proxies=proxy_dict, timeout=3)
+            response = requests.get(http_url, headers=headers, proxies=proxy_dict, timeout=3)
+            print response.status_code
         except Exception as e:
             print "invalid ip and port"
-            # self.delete_ip(ip)
+            self.delete_ip(ip)
             return False
         else:
             code = response.status_code
@@ -75,7 +78,7 @@ class GetIP(object):
                 return True
             else:
                 print "invalid ip and port"
-                # self.delete_ip(ip)
+                self.delete_ip(ip)
                 return False
 
     def get_random_ip(self):
@@ -100,5 +103,6 @@ class GetIP(object):
 
 # crawl_ips()
 if __name__ == "__main__":
+    # crawl_ips()
     get_ip = GetIP()
     get_ip.get_random_ip()
