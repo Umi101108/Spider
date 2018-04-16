@@ -106,19 +106,9 @@ class MysqlTwistedPipline(object):
     def do_insert(self, cursor, item):
         # 执行具体的插入
         # 根据不同的item构建不同的sql语句并插入到mysql中
-        # insert_sql, params = item.get_insert_sql()
+        insert_sql, params = item.get_insert_sql()
         # print insert_sql, params
-        # cursor.execute(insert_sql, params)
-        insert_sql = """
-                    insert into jobbole_article_copy(title, url, url_object_id, create_date, fav_nums, front_image_url, front_image_path,
-                    praise_nums, comment_nums, tags, content)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE fav_nums=VALUES(fav_nums)
-                """
-        cursor.execute(insert_sql, (
-        item["title"], item["url"], item["url_object_id"], item["create_date"], item["fav_nums"],
-        item["front_image_url"], item["front_image_path"], item["praise_nums"], item["comment_nums"], item["tags"],
-        item["content"]))
-        # self.conn.commit()
+        cursor.execute(insert_sql, params)
 
 
 class ElasticsearchPipeline(object):
