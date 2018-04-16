@@ -74,7 +74,7 @@ class LagouJobItem(scrapy.Item):
             self["work_years"], self["degree_need"], self["job_type"],
             self["publish_time"], self["job_advantage"], self["job_desc"],
             self["job_addr"], self["company_name"], self["company_url"],
-            self["job_addr"], self["crawl_time"].strftime(SQL_DATETIME_FORMAT),
+            self["tags"], self["crawl_time"].strftime(SQL_DATETIME_FORMAT),
         )
         print insert_sql, params
         return insert_sql, params

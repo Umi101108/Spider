@@ -8,6 +8,9 @@ from scrapy.http import HtmlResponse
 from scrapy.xlib.pydispatch import dispatcher
 from fake_useragent import UserAgent
 
+from LagouSpider.utils.crawl_xici_ip import GetIP
+
+
 class UserAgentMiddleware(object):
     """This middleware allows spiders to override the user_agent"""
 
@@ -51,7 +54,9 @@ class RandomUserAgentMiddleware(object):
 class RandomProxyMiddleware(object):
     # 动态设置ip代理
     def process_request(self, request, spider):
-        request.meta["proxy"] = "http://111.198.219.151:8118"
+        # request.meta["proxy"] = "http://111.198.219.151:8118"
+        get_ip = GetIP()
+        request.meta["proxy"] = get_ip.get_random_ip()
 
 
 class JSPageMiddleware(object):
@@ -76,3 +81,13 @@ class JSPageMiddleware(object):
         # 当爬虫退出的时候关闭chrome
         print "spider closed"
         self.driver.quit()
+
+
+# todo
+# scrapy-splash 支持分布式
+# pyvirtualdisplay 无界面环境下运行chrome
+#         from pyvirtualdisplay import Display
+#         display = Display(visible=0, size=(800, 600))
+#         display.start()
+# selenium grid
+# splinter
