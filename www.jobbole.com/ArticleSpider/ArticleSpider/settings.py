@@ -29,7 +29,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+# DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -109,7 +109,31 @@ AUTOTHROTTLE_ENABLED = False
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
-MYSQL_HOST = "127.0.0.1"
+# MYSQL_HOST = "127.0.0.1"
+MYSQL_HOST = "host"
 MYSQL_DBNAME = "jobbole"
-MYSQL_USER = "root"
+MYSQL_PORT = 3306
+MYSQL_USER = "user"
 MYSQL_PASSWORD = "password"
+
+
+# 分布式设置
+# 调度器
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# 请求调度模式
+# # 队列
+# SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderQueue"
+# # 栈
+# SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderStack"
+# # 优先级队列
+# SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderPriorityQueue"
+# 去重
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# 不清理Redis队列
+SCHEDULER_PERSIST = False
+DUPEFILTER_PERSIST = False
+# redis地址
+# REDIS_URL = 'redis://127.0.0.1:6379'
+REDIS_URL = 'redis://:password@host:6379'
+# REDIS_HOST = ''
+# REDIS_PORT = 6379

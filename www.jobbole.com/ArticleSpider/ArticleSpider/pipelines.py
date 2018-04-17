@@ -84,6 +84,7 @@ class MysqlTwistedPipline(object):
         dbparms = dict(
             host = settings["MYSQL_HOST"],
             db = settings["MYSQL_DBNAME"],
+            port = settings["MYSQL_PORT"],
             user = settings["MYSQL_USER"],
             passwd = settings["MYSQL_PASSWORD"],
             charset = 'utf8mb4',
