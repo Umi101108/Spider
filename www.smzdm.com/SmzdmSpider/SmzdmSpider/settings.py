@@ -71,7 +71,7 @@ DEFAULT_REQUEST_HEADERS = {
 ITEM_PIPELINES = {
    # 'SmzdmSpider.pipelines.SmzdmspiderPipeline': 300,
     'SmzdmSpider.pipelines.MysqlTwistedPipline': 1,
-    'scrapy_redis.pipelines.RedisPipeline': 301,
+    # 'scrapy_redis.pipelines.RedisPipeline': 301,
 }
 
 CONCURRENT_ITEMS = 100
@@ -97,29 +97,29 @@ CONCURRENT_ITEMS = 100
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MYSQL_HOST = "101.132.110.53"
-MYSQL_PORT = 3307
+MYSQL_HOST = "127.0.0.1"
+MYSQL_PORT = 3306
 MYSQL_DBNAME = "smzdm"
-MYSQL_USER = "umi"
-MYSQL_PASSWORD = "19930927wan"
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "password"
 
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 SQL_DATE_FORMAT = "%Y-%m-%d"
 
 
-# 过滤器
-DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-
-# 调度器
-SCHEDULER = "scrapy_redis.scheduler.Scheduler"
-
-# 调度状态持久化
-SCHEDULER_PERSIST = True
-
-# 请求调度使用优先队列
-SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
-
-# redis使用的端口和地址
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
-# REDIS_URL = 'redis://:27@:6379'
+# # 过滤器
+# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+#
+# # 调度器
+# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+#
+# # 调度状态持久化
+# SCHEDULER_PERSIST = True
+#
+# # 请求调度使用优先队列
+# SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.SpiderPriorityQueue'
+#
+# # redis使用的端口和地址
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = 6379
+# # REDIS_URL = 'redis://:27@:6379'

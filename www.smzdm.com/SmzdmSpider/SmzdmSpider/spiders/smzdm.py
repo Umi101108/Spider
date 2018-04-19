@@ -20,7 +20,7 @@ class SmzdmSpider(CrawlSpider):
     rules = (
         # Rule(LinkExtractor(allow=("baoliao/.*",)), follow=True),
         Rule(LinkExtractor(allow=r'www.smzdm.com/p/\d+/$'), callback='parse_post', follow=True),
-        # Rule(LinkExtractor(allow=r'www.smzdm.com/p/\d+/p\d+/'), callback='parse_comment', follow=True),
+        Rule(LinkExtractor(allow=r'www.smzdm.com/p/\d+/p\d+/'), callback='parse_comment', follow=True),
         Rule(LinkExtractor(allow=r'zhiyou.smzdm.com/member/\d+/$'), callback='parse_member', follow=True),
     )
 
@@ -41,7 +41,7 @@ class SmzdmSpider(CrawlSpider):
         item_loader = SmzdmspiderItemLoader(item=SmzdmArticleItem(), response=response)
         item_loader.add_value("article_id", article_id)
         item_loader.add_css("article_channel", '#article_channel::attr(value)')
-        item_loader.add_css("article_title", '.article_title > em[itemprop="name"]::text')
+        item_loader.add_css("article_title", '.article_title  em[itemprop="name"]::text')
         item_loader.add_value("article_url", response.url)
         if response.css('.ellipsis.author'):
             if response.css('.ellipsis.author > a::text'):
