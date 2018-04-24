@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+__author__ = 'umi'
+__date__ = '2018/4/24 下午2:27'
+
+MONGO_URL = 'localhost'
+MONGO_DB = 'toutiao'
+MONGO_TABLE = 'toutiao'
+
+GROUP_START = 1
+GROUP_END = 20
+KEYWORD = '街拍'
