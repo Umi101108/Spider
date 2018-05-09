@@ -4,7 +4,10 @@ import re
 import json
 import time
 import datetime
-from urlparse import urljoin
+try:
+    from urlparse import urljoin
+except:
+    from urllib.parse import urljoin
 from PIL import Image
 import scrapy
 from scrapy.loader import ItemLoader
@@ -123,7 +126,7 @@ class ZhihuSpider(scrapy.Spider):
             item_loader.add_css("topics", ".QuestionHeader-topics .Popover div::text")
 
             question_item = item_loader.load_item()
-            print question_item
+            # print question_item
         else:
             #处理老版本页面的item提取
             match_obj = re.match("(.*zhihu.com/question/(\d+))(/|$).*", response.url)

@@ -8,6 +8,7 @@
 from twisted.enterprise import adbapi
 import MySQLdb
 import MySQLdb.cursors
+import pymongo
 
 
 class ZhihuspiderPipeline(object):
@@ -27,7 +28,7 @@ class MysqlPipeline(object):
         cursor.execute(insert_sql, params)
 
 
-class MysqlTwistedPipline(object):
+class MysqlTwistedPipeline(object):
     def __init__(self, dbpool):
         self.dbpool = dbpool
 
@@ -53,7 +54,7 @@ class MysqlTwistedPipline(object):
 
     def handle_error(self, failure, item, spider):
         # 处理异步插入的异常
-        print item
+        print (item)
         print (failure)
 
     def do_insert(self, cursor, item):
@@ -62,3 +63,35 @@ class MysqlTwistedPipline(object):
         insert_sql, params = item.get_insert_sql()
         # print insert_sql, params
         cursor.execute(insert_sql, params)
+
+
+class MongoPipeline(object):
+
+    def __init__(self, mongo_uri, mongo_db, mongo_user, mongo_password):
+        self.mongo_uri = mongo_uri
+        self.mongo_db = mongo_db
+        self.mongo_user = mongo_user
+        self.mongo_password = mongo_password
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            mongo_uri=crawler.settings.get('MONGO_URI'),
+            mongo_db=crawler.settings.get('MONGO_DATABASE', 'items'),
+            mongo_user=crawler.settings.get('MONGO_USER', ''),
+            mongo_password=crawler.settings.get('MONGO_PASSWORD', ''),
+        )
+
+    def open_spider(self, spider):
+        self.client = pymongo.MongoClient(self.mongo_uri)
+        # self.client.admin.authenticate(self.mongo_user, self.mongo_password)
+        self.db = self.client[self.mongo_db]
+
+    def close_spider(self, spider):
+        self.client.close()
+
+    def process_item(self, item, spider):
+        collection_name = item.__class__.__name__
+        # self.db[collection_name].insert(dict(item))
+        self.db[collection_name].update({'url_token': item['url_token']}, {'$set': item}, True)
+        return item

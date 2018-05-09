@@ -72,6 +72,7 @@ ITEM_PIPELINES = {
     # 'ZhihuSpider.pipelines.SomePipeline': 300,
     # 'ZhihuSpider.pipelines.MysqlTwistedPipeline': 1,
     'ZhihuSpider.pipelines.MongoPipeline': 2,
+    'scrapy_redis.pipelines.RedisPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -104,4 +105,19 @@ SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 SQL_DATE_FORMAT = "%Y-%m-%d"
 
 MONGO_URI = 'localhost'
+# MONGO_URI = '101.132.110.53'
+MONGO_PORT = 27017
 MONGO_DATABASE = 'zhihu'
+MONGO_USER = 'root'
+MONGO_PASSWORD = 'password'
+
+
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+REDIS_URL = 'redis://:umi101108@101.132.110.53:6379'
+
+SCHEDULER_PERSIST = False
+
+SCHEDULER_FLUSH_ON_START = True
