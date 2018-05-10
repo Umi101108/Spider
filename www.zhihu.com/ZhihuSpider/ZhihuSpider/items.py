@@ -11,8 +11,8 @@ import re
 import scrapy
 from scrapy.loader.processors import MapCompose
 
-from settings import SQL_DATETIME_FORMAT
-from utils.common import extract_num
+from ZhihuSpider.settings import SQL_DATETIME_FORMAT
+from ZhihuSpider.utils.common import extract_num
 
 
 def get_num(value):
