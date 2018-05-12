@@ -38,14 +38,6 @@ class UserSpider(scrapy.Spider):
         yield Request(self.followees_url.format(user=self.start_user, include=self.followees_query, offset=0, limit=20), headers=self.headers, callback=self.parse_followees, cookies=self.cookie)
         yield Request(self.followers_url.format(user=self.start_user, include=self.followers_query, offset=0, limit=20), headers=self.headers, callback=self.parse_followers, cookies=self.cookie)
 
-        # yield Request(url, headers=self.headers, callback=self.parse, cookies=self.cookie)
-
-
-    def parse(self, response):
-        print (response.request.headers)
-        print (response.encoding)
-        print (type(response.text))
-        print (response.text)
 
     def parse_user(self, response):
         result = json.loads(response.text)
@@ -60,7 +52,6 @@ class UserSpider(scrapy.Spider):
 
     def parse_followees(self, response):
         results = json.loads(response.text)
-        print (results)
         if 'data' in results.keys():
             for result in results.get('data'):
                 print (result.get('url_token'))

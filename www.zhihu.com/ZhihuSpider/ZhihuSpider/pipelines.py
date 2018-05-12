@@ -67,8 +67,9 @@ class MysqlTwistedPipeline(object):
 
 class MongoPipeline(object):
 
-    def __init__(self, mongo_uri, mongo_db, mongo_user, mongo_password):
+    def __init__(self, mongo_uri, mongo_port, mongo_db, mongo_user, mongo_password):
         self.mongo_uri = mongo_uri
+        self.mongo_port = mongo_port
         self.mongo_db = mongo_db
         self.mongo_user = mongo_user
         self.mongo_password = mongo_password
@@ -77,14 +78,16 @@ class MongoPipeline(object):
     def from_crawler(cls, crawler):
         return cls(
             mongo_uri=crawler.settings.get('MONGO_URI'),
+            mongo_port=crawler.settings.get('MONGO_PORT', 27017),
             mongo_db=crawler.settings.get('MONGO_DATABASE', 'items'),
             mongo_user=crawler.settings.get('MONGO_USER', ''),
             mongo_password=crawler.settings.get('MONGO_PASSWORD', ''),
         )
 
     def open_spider(self, spider):
-        self.client = pymongo.MongoClient(self.mongo_uri)
-        # self.client.admin.authenticate(self.mongo_user, self.mongo_password)
+        self.client = pymongo.MongoClient(host=self.mongo_uri)
+        if self.mongo_password:
+            self.client.admin.authenticate(self.mongo_user, self.mongo_password)
         self.db = self.client[self.mongo_db]
 
     def close_spider(self, spider):

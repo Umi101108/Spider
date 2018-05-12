@@ -27,7 +27,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -71,15 +71,15 @@ DEFAULT_REQUEST_HEADERS = {
 ITEM_PIPELINES = {
     # 'ZhihuSpider.pipelines.SomePipeline': 300,
     # 'ZhihuSpider.pipelines.MysqlTwistedPipeline': 1,
-    'ZhihuSpider.pipelines.MongoPipeline': 2,
-    'scrapy_redis.pipelines.RedisPipeline': 301,
+    'ZhihuSpider.pipelines.MongoPipeline': 1,
+    # 'scrapy_redis.pipelines.RedisPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
-# AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-AUTOTHROTTLE_START_DELAY = 1
+AUTOTHROTTLE_START_DELAY = 10
 # The maximum download delay to be set in case of high latencies
 #AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
@@ -104,20 +104,21 @@ MYSQL_PASSWORD = "password"
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 SQL_DATE_FORMAT = "%Y-%m-%d"
 
-MONGO_URI = 'localhost'
-# MONGO_URI = '101.132.110.53'
+# MONGO_URI = 'localhost'
+MONGO_URI = '101.132.110.53'
+# MONGO_URI = '140.143.163.208'
 MONGO_PORT = 27017
 MONGO_DATABASE = 'zhihu'
-MONGO_USER = 'root'
-MONGO_PASSWORD = 'password'
+# MONGO_USER = 'root'
+# MONGO_PASSWORD = 'password'
 
 
-SCHEDULER = "scrapy_redis.scheduler.Scheduler"
-
-DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-
-REDIS_URL = 'redis://:umi101108@101.132.110.53:6379'
-
-SCHEDULER_PERSIST = False
-
-SCHEDULER_FLUSH_ON_START = True
+# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+#
+# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+#
+# REDIS_URL = 'redis://:umi101108@101.132.110.53:6379'
+#
+# SCHEDULER_PERSIST = False
+#
+# SCHEDULER_FLUSH_ON_START = True
